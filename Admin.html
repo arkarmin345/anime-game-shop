@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050506">
+<title>🛠 Admin — Anime GAME SHOP</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,4 90,27 90,73 50,96 10,73 10,27' fill='none' stroke='%23ff1f3d' stroke-width='5'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle'%3E🛠%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
+body{background:#050506;background-image:radial-gradient(circle at 50% -12%,rgba(255,31,61,.16),transparent 55%),radial-gradient(circle at 50% 115%,rgba(255,31,61,.10),transparent 55%);background-attachment:fixed;color:#ececf0;font-family:'Poppins','Padauk','Noto Sans Myanmar',system-ui,sans-serif;min-height:100vh;padding-bottom:40px}
+::-webkit-scrollbar{width:0;height:0}
+button,input{font-family:inherit;outline:none;border:none;cursor:pointer}
+.hidden{display:none !important}
+@keyframes markPulse{0%,100%{filter:drop-shadow(0 0 14px rgba(255,31,61,.7))}50%{filter:drop-shadow(0 0 28px rgba(255,31,61,1))}}
+@keyframes cloverFloat{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-5px) rotate(4deg)}}
+@keyframes shineSweep{0%,100%{background-position:-150% 0}50%{background-position:250% 0}}
+@keyframes fd{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes barGrow{from{height:0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.logo-mark-min{position:relative;width:88px;height:88px;display:flex;align-items:center;justify-content:center;animation:markPulse 3.4s ease-in-out infinite}
+.logo-mark-min svg{position:absolute;inset:0;width:100%;height:100%}
+.logo-mark-min .hex-glow{fill:url(#hexGrad2);opacity:.4}
+.logo-mark-min .hex-border{fill:none;stroke:#ff1f3d;stroke-width:1.8;filter:drop-shadow(0 0 5px rgba(255,31,61,.9))}
+.logo-mark-min .clover{position:relative;z-index:2;font-size:34px;line-height:1;filter:drop-shadow(0 0 10px rgba(255,31,61,.95));animation:cloverFloat 3.2s ease-in-out infinite}
+.lw-line{display:flex;align-items:baseline;gap:10px;font-family:'Orbitron',sans-serif;font-weight:900;letter-spacing:3.5px;line-height:1;justify-content:center}
+.lw-line .anime{color:#fff;text-shadow:0 0 12px rgba(255,255,255,.35)}
+.lw-line .shop{color:#ff1f3d;text-shadow:0 0 10px #ff1f3d,0 0 24px #ff1f3d;position:relative}
+.lw-line .shop::after{content:'ADMIN';position:absolute;inset:0;background:linear-gradient(100deg,transparent 0%,transparent 40%,rgba(255,255,255,.98) 50%,transparent 60%,transparent 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shineSweep 3.4s ease-in-out infinite;pointer-events:none}
+.logo-tagline-min{display:flex;align-items:center;gap:9px;font-size:9.5px;letter-spacing:5px;color:#8b8b96;font-weight:700;margin-top:8px;justify-content:center}
+.logo-tagline-min::before,.logo-tagline-min::after{content:'';width:26px;height:1px;background:linear-gradient(90deg,transparent,#ff1f3d,transparent)}
+.mini-logo{position:relative;width:38px;height:38px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.mini-logo svg{position:absolute;inset:0;width:100%;height:100%}
+.mini-logo .hex-border-sm{fill:none;stroke:#ff1f3d;stroke-width:2.2;filter:drop-shadow(0 0 6px rgba(255,31,61,.9))}
+.mini-logo .clover-sm{position:relative;z-index:2;font-size:16px;line-height:1;filter:drop-shadow(0 0 7px rgba(255,31,61,1))}
+#login{position:fixed;inset:0;z-index:900;display:flex;align-items:center;justify-content:center;padding:18px;background:#050506;overflow-y:auto}
+.login-card{width:100%;max-width:400px;background:linear-gradient(180deg,#0e0e12,#08080b);border:1px solid #1d1d24;border-radius:22px;padding:28px 22px 24px;box-shadow:0 0 40px rgba(255,31,61,.14);margin:auto}
+.login-brand{display:flex;flex-direction:column;align-items:center;margin-bottom:22px}
+.fld{display:block;margin-bottom:13px}
+.fld span{display:block;font-size:12px;color:#9a9aa6;margin-bottom:7px;font-weight:600}
+.fld input{width:100%;padding:14px 15px;background:#101014;border:1px solid #202028;border-radius:13px;color:#fff;font-size:14.5px}
+.fld input:focus{border-color:#ff1f3d;box-shadow:0 0 0 3px rgba(255,31,61,.13);background:#141419}
+.btn-p{width:100%;padding:15px;border-radius:14px;font-size:13.5px;font-weight:800;letter-spacing:1.5px;background:linear-gradient(135deg,#ff1f3d,#a80020);color:#fff;font-family:'Orbitron',sans-serif;box-shadow:0 0 22px rgba(255,31,61,.45)}
+.btn-p:active{transform:scale(.97)}
+.login-note{text-align:center;font-size:11px;color:#6d6d78;margin-top:15px;line-height:1.7}
+#app{max-width:900px;margin:0 auto;padding:14px}
+.topbar{position:sticky;top:0;z-index:60;background:rgba(5,5,6,.94);backdrop-filter:blur(14px);border-bottom:1px solid #16161c;padding:13px 16px;display:flex;align-items:center;gap:12px;border-radius:0 0 18px 18px;margin:-14px -14px 14px}
+.topbar .tb-brand{display:flex;align-items:center;gap:11px;flex:1;min-width:0}
+.topbar .tb-text{min-width:0;overflow:hidden}
+.topbar h1{font-family:'Orbitron',sans-serif;font-size:12.5px;font-weight:900;letter-spacing:1.8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1}
+.topbar h1 span{color:#ff1f3d}
+.topbar .tb-text p{font-size:8px;color:#6d6d78;letter-spacing:2px;margin-top:4px;font-weight:700}
+.topbar .logout{padding:8px 14px;border-radius:30px;background:#141419;border:1px solid #24242c;color:#ff5c78;font-size:10.5px;font-weight:800;font-family:'Orbitron',sans-serif}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:16px}
+.stat{background:linear-gradient(160deg,#101015,#0a0a0e);border:1px solid #1e1e26;border-radius:14px;padding:13px 10px;text-align:center}
+.stat .v{font-size:20px;font-weight:900;color:#ff5c78;font-family:'Orbitron',sans-serif}
+.stat .l{font-size:9px;color:#7c7c88;margin-top:5px;font-weight:700;font-family:'Orbitron',sans-serif}
+.stat.g .v{color:#25e08a}
+.stat.y .v{color:#ffc42e}
+.stat.b .v{color:#3aa0ff}
+.atabs{display:flex;gap:7px;background:#111116;border-radius:14px;padding:4px;margin-bottom:16px;border:1px solid #1c1c22;overflow-x:auto}
+.atabs button{flex:1;min-width:82px;padding:11px 8px;border-radius:11px;background:transparent;color:#8b8b96;font-size:10.5px;font-weight:800;white-space:nowrap;font-family:'Orbitron',sans-serif;letter-spacing:.8px}
+.atabs button.active{background:linear-gradient(135deg,#ff1f3d,#c10026);color:#fff;box-shadow:0 0 16px rgba(255,31,61,.5)}
+.atabs button .cnt{display:inline-block;margin-left:5px;background:rgba(255,255,255,.2);padding:1px 6px;border-radius:20px;font-size:10px;font-family:'Poppins',sans-serif}
+.sec{display:none}
+.sec.active{display:block;animation:fd .3s ease}
+.sec-title{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;margin:0 0 12px;letter-spacing:1.2px;font-family:'Orbitron',sans-serif}
+.sec-title::before{content:'';width:3.5px;height:16px;border-radius:4px;background:#ff1f3d;box-shadow:0 0 10px #ff1f3d}
+.card{background:#0d0d12;border:1px solid #1c1c24;border-radius:16px;padding:14px;margin-bottom:11px}
+.card.pend{border-color:rgba(255,190,0,.3);box-shadow:0 0 18px rgba(255,190,0,.06)}
+.card-head{display:flex;align-items:flex-start;gap:11px;margin-bottom:10px}
+.card-head .ci{font-size:22px;line-height:1}
+.card-head .cb{flex:1;min-width:0}
+.card-head .ct{font-size:13px;font-weight:900;word-break:break-all}
+.card-head .cs{font-size:10.5px;color:#7c7c88;margin-top:4px;line-height:1.6;word-break:break-all}
+.card-head .ca{font-size:15px;font-weight:900;color:#ff5c78;white-space:nowrap;font-family:'Orbitron',sans-serif}
+.rcpt{margin-top:10px;border-radius:12px;overflow:hidden;border:1px solid #23232c;background:#000;cursor:pointer;position:relative}
+.rcpt img{width:100%;max-height:300px;object-fit:contain;display:block}
+.rcpt::after{content:'👆 ချဲ့ကြည့်';position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,.75);color:#ff8fa1;font-size:10px;padding:4px 9px;border-radius:20px;font-weight:700}
+.card-actions{display:flex;gap:9px;margin-top:12px}
+.card-actions button{flex:1;padding:12px;border-radius:12px;font-size:11.5px;font-weight:800;letter-spacing:.8px;font-family:'Orbitron',sans-serif}
+.card-actions .ok{background:linear-gradient(135deg,#00b36b,#00794a);color:#fff;box-shadow:0 0 16px rgba(0,179,107,.35)}
+.card-actions .no{background:#1c1c24;color:#ff5c78;border:1px solid rgba(255,31,61,.4)}
+.card-actions button:active{transform:scale(.97)}
+.usr{display:flex;align-items:center;gap:12px;background:#0d0d12;border:1px solid #1c1c24;border-radius:14px;padding:13px 14px;margin-bottom:9px}
+.usr .av{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:#fff;background:linear-gradient(135deg,#ff1f3d,#7a0018);flex-shrink:0;font-family:'Orbitron',sans-serif}
+.usr .ub{flex:1;min-width:0}
+.usr .un{font-size:13px;font-weight:900;word-break:break-all}
+.usr .uc{font-size:10.5px;color:#7c7c88;margin-top:3px;word-break:break-all}
+.usr .ubal{font-size:13px;font-weight:900;color:#ff5c78;white-space:nowrap;font-family:'Orbitron',sans-serif}
+.usr .badd{padding:8px 12px;border-radius:11px;background:linear-gradient(135deg,#ff1f3d,#a80020);color:#fff;font-size:11px;font-weight:800;white-space:nowrap}
+.addform{background:#0e0e13;border:1px solid #1c1c24;border-radius:15px;padding:15px;margin-bottom:16px}
+.addform h4{font-size:11.5px;color:#ff5c78;font-weight:900;margin-bottom:12px;letter-spacing:1.2px;font-family:'Orbitron',sans-serif}
+.addform input{width:100%;padding:13px 14px;background:#141419;border:1px solid #202028;border-radius:12px;color:#fff;font-size:13.5px;margin-bottom:10px}
+.addform input:focus{border-color:#ff1f3d}
+.addform button{width:100%;padding:13px;border-radius:12px;background:linear-gradient(135deg,#ff1f3d,#a80020);color:#fff;font-weight:800;font-size:12px;letter-spacing:1.2px;font-family:'Orbitron',sans-serif}
+.empty{text-align:center;padding:52px 20px;color:#5d5d68}
+.empty .e{font-size:44px;opacity:.4;margin-bottom:12px}
+.empty p{font-size:13px}
+#lightbox{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.95);display:flex;align-items:center;justify-content:center;padding:20px}
+#lightbox img{max-width:100%;max-height:92vh;object-fit:contain;border-radius:12px;box-shadow:0 0 40px rgba(255,31,61,.4)}
+#lightbox .close{position:absolute;top:20px;right:20px;width:44px;height:44px;border-radius:50%;background:#ff1f3d;color:#fff;font-size:20px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.report-range{display:flex;gap:7px;background:#111116;border-radius:12px;padding:4px;margin-bottom:16px;border:1px solid #1c1c22}
+.report-range button{flex:1;padding:10px;border-radius:9px;background:transparent;color:#8b8b96;font-size:11px;font-weight:800;font-family:'Orbitron',sans-serif}
+.report-range button.active{background:linear-gradient(135deg,#ff1f3d,#c10026);color:#fff}
+.report-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px}
+.rep-card{background:linear-gradient(160deg,#12121a,#0c0c11);border:1px solid #1e1e26;border-radius:15px;padding:15px}
+.rep-card .rl{font-size:10px;color:#8b8b96;font-weight:700;font-family:'Orbitron',sans-serif}
+.rep-card .rv{font-size:22px;font-weight:900;color:#fff;margin-top:8px;font-family:'Orbitron',sans-serif}
+.rep-card .rv.clover{color:#ff5c78}
+.rep-card .rv.green{color:#25e08a}
+.rep-card .rv.yellow{color:#ffc42e}
+.rep-card .rs{font-size:10.5px;color:#6d6d78;margin-top:6px}
+.chart-card{background:linear-gradient(160deg,#0f0f15,#0a0a0e);border:1px solid #1e1e26;border-radius:16px;padding:16px;margin-bottom:14px}
+.chart-title{font-size:11px;color:#ff5c78;font-weight:900;letter-spacing:1.2px;font-family:'Orbitron',sans-serif;margin-bottom:14px}
+.chart-bars{display:flex;align-items:flex-end;gap:8px;height:150px;padding:0 4px}
+.chart-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px}
+.chart-bar{width:100%;border-radius:8px 8px 4px 4px;background:linear-gradient(180deg,#ff1f3d,#7a0018);animation:barGrow .8s;min-height:3px}
+.chart-lbl{font-size:9px;color:#6d6d78;font-weight:700;font-family:'Orbitron',sans-serif}
+.top-list{background:#0d0d12;border:1px solid #1c1c24;border-radius:14px;padding:12px;margin-bottom:14px}
+.top-item{display:flex;align-items:center;gap:11px;padding:9px 4px;border-bottom:1px solid #17171e}
+.top-item:last-child{border-bottom:none}
+.top-item .rank{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#ff1f3d,#7a0018);color:#fff;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;flex-shrink:0}
+.top-item .rank.r1{background:linear-gradient(135deg,#ffc42e,#8a6f00)}
+.top-item .rank.r2{background:linear-gradient(135deg,#c0c0c0,#666)}
+.top-item .rank.r3{background:linear-gradient(135deg,#cd7f32,#6b3d00)}
+.top-item .tn{font-size:12.5px;font-weight:800;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.top-item .tc{font-size:10.5px;color:#8b8b96;margin-top:2px}
+.top-item .tv{font-size:12.5px;color:#ff5c78;font-weight:900;font-family:'Orbitron',sans-serif;white-space:nowrap}
+.promo-item{background:#0d0d12;border:1px solid #1c1c24;border-radius:14px;padding:13px 14px;margin-bottom:9px;display:flex;align-items:center;gap:11px}
+.promo-item .pc{flex:1;min-width:0}
+.promo-item .pcode{font-size:14px;font-weight:900;color:#ffc42e;letter-spacing:1.2px;font-family:'Orbitron',sans-serif}
+.promo-item .pmeta{font-size:10.5px;color:#8b8b96;margin-top:5px;line-height:1.6;word-break:break-all}
+.promo-item .pdisc{font-size:18px;font-weight:900;color:#25e08a;font-family:'Orbitron',sans-serif;white-space:nowrap}
+.promo-item .pact{display:flex;flex-direction:column;gap:5px}
+.promo-item .pact button{padding:6px 11px;border-radius:9px;font-size:10.5px;font-weight:800;font-family:'Orbitron',sans-serif}
+.promo-item .pact .toggle{background:rgba(0,200,120,.15);color:#25e08a;border:1px solid rgba(0,200,120,.35)}
+.promo-item .pact .toggle.off{background:rgba(255,31,61,.13);color:#ff5c78;border-color:rgba(255,31,61,.35)}
+.promo-item .pact .del{background:#1c1c24;color:#ff5c78;border:1px solid rgba(255,31,61,.35)}
+.promo-item.off{opacity:.55}
+#toast{position:fixed;left:50%;bottom:32px;transform:translateX(-50%) translateY(24px);z-index:99999;background:rgba(16,16,20,.97);border:1px solid rgba(255,31,61,.45);color:#fff;padding:12px 20px;border-radius:30px;font-size:12.5px;font-weight:700;opacity:0;pointer-events:none;transition:.3s;max-width:88%;text-align:center}
+#toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+#loading{position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,.85);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-family:'Orbitron',sans-serif;font-size:13px;gap:16px}
+#loading .sp{width:44px;height:44px;border:3px solid rgba(255,31,61,.2);border-top-color:#ff1f3d;border-radius:50%;animation:spin 1s linear infinite}
+@media(max-width:480px){.stats{grid-template-columns:repeat(2,1fr)}.report-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div id="login">
+  <div class="login-card">
+    <div class="login-brand">
+      <div class="logo-mark-min">
+        <svg viewBox="0 0 100 100">
+          <defs><radialGradient id="hexGrad2" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ff1f3d" stop-opacity="1"/><stop offset="100%" stop-color="#ff1f3d" stop-opacity="0"/></radialGradient></defs>
+          <polygon class="hex-glow" points="50,4 90,27 90,73 50,96 10,73 10,27"/>
+          <polygon class="hex-border" points="50,4 90,27 90,73 50,96 10,73 10,27"/>
+        </svg>
+        <div class="clover">🍀</div>
+      </div>
+      <div class="lw-line" style="margin-top:14px"><span class="anime" style="font-size:15px">ANIME</span><span class="shop" style="font-size:15px">ADMIN</span></div>
+      <div class="logo-tagline-min">CONTROL PANEL</div>
+    </div>
+    <label class="fld"><span>📧 Admin Email</span><input id="lgEmail" type="text" value="admin@shop.com" autocomplete="off"></label>
+    <label class="fld"><span>🔒 Password</span><input id="lgPass" type="password" value="admin12345"></label>
+    <button class="btn-p" onclick="adminLogin()">🔓 LOGIN</button>
+    <div class="login-note">Default: <b style="color:#ff5c78">admin@shop.com</b> / <b style="color:#ff5c78">admin12345</b></div>
+  </div>
+</div>
+
+<div id="loading" class="hidden"><div class="sp"></div><div>LOADING...</div></div>
+
+<div id="app" class="hidden">
+  <div class="topbar">
+    <div class="tb-brand">
+      <div class="mini-logo"><svg viewBox="0 0 100 100"><polygon class="hex-border-sm" points="50,6 88,28 88,72 50,94 12,72 12,28"/></svg><div class="clover-sm">🍀</div></div>
+      <div class="tb-text"><h1>ANIME <span>ADMIN</span></h1><p>CONTROL PANEL</p></div>
+    </div>
+    <button class="logout" onclick="adminLogout()">🚪 EXIT</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="v" id="stPending">0</div><div class="l">PENDING</div></div>
+    <div class="stat g"><div class="v" id="stUsers">0</div><div class="l">USERS</div></div>
+    <div class="stat b"><div class="v" id="stOrders">0</div><div class="l">ORDERS</div></div>
+    <div class="stat y"><div class="v" id="stClover">0</div><div class="l">CLOVER</div></div>
+  </div>
+
+  <div class="atabs">
+    <button data-tab="pending" class="active" onclick="switchTab('pending')">⏳ ပြေစာ <span class="cnt" id="cPending">0</span></button>
+    <button data-tab="report" onclick="switchTab('report')">📊 REPORT</button>
+    <button data-tab="promos" onclick="switchTab('promos')">🎁 PROMOS</button>
+    <button data-tab="users" onclick="switchTab('users')">👥 USERS</button>
+    <button data-tab="orders" onclick="switchTab('orders')">📦 ORDERS</button>
+    <button data-tab="history" onclick="switchTab('history')">📋 HISTORY</button>
+  </div>
+
+  <div class="sec active" id="sec-pending">
+    <div class="sec-title">⏳ ငွေလွှဲပြေစာ စစ်ဆေးရန်</div>
+    <div id="pendingList"></div>
+  </div>
+
+  <div class="sec" id="sec-report">
+    <div class="sec-title">📊 ရောင်းအား Report</div>
+    <div class="report-range">
+      <button data-range="today" class="active" onclick="setReportRange('today')">📅 ယနေ့</button>
+      <button data-range="week" onclick="setReportRange('week')">📆 ၇ ရက်</button>
+      <button data-range="month" onclick="setReportRange('month')">🗓 ၃၀ ရက်</button>
+      <button data-range="all" onclick="setReportRange('all')">∞ အားလုံး</button>
+    </div>
+    <div class="report-grid">
+      <div class="rep-card"><div class="rl">🍀 REVENUE</div><div class="rv clover" id="repRev">0</div><div class="rs" id="repRevSub">Orders 0 ခု</div></div>
+      <div class="rep-card"><div class="rl">📦 ORDERS</div><div class="rv" id="repOrders">0</div><div class="rs" id="repOrdersSub">အောင်မြင်ပြီး</div></div>
+      <div class="rep-card"><div class="rl">💰 TOPUP APPROVED</div><div class="rv green" id="repTopup">0</div><div class="rs" id="repTopupSub">🍀 ဖြည့်ပြီး</div></div>
+      <div class="rep-card"><div class="rl">⏳ PENDING TOPUP</div><div class="rv yellow" id="repPending">0</div><div class="rs" id="repPendingSub">စစ်ဆေးရန်</div></div>
+    </div>
+    <div class="chart-card"><div class="chart-title">📈 ၇ ရက် ရောင်းအား</div><div class="chart-bars" id="chartBars"></div></div>
+    <div class="sec-title">🏆 TOP PRODUCTS</div>
+    <div class="top-list" id="topProducts"></div>
+    <div class="sec-title">👑 TOP BUYERS</div>
+    <div class="top-list" id="topBuyers"></div>
+  </div>
+
+  <div class="sec" id="sec-promos">
+    <div class="sec-title">🎁 PROMO ဖန်တီး</div>
+    <div class="addform">
+      <h4>➕ PROMO CODE အသစ်</h4>
+      <input id="prCode" type="text" placeholder="Code (ဥပမာ NEWYEAR20)" maxlength="20" oninput="this.value=this.value.toUpperCase()">
+      <input id="prDiscount" type="text" inputmode="numeric" placeholder="Discount % (1-90)">
+      <input id="prMax" type="text" inputmode="numeric" placeholder="Max Uses (ဥပမာ 100)">
+      <input id="prExpiry" type="date">
+      <button onclick="createPromo()">🎁 PROMO ဖန်တီးမည်</button>
+    </div>
+    <div class="sec-title">📋 PROMO CODES</div>
+    <div id="promoList"></div>
+  </div>
+
+  <div class="sec" id="sec-users">
+    <div class="sec-title">🍀 CLOVER ADD</div>
+    <div class="addform">
+      <h4>➕ USER သို့ ဖြည့်ရန်</h4>
+      <input id="admUser" list="admUserList" placeholder="Email / Phone">
+      <datalist id="admUserList"></datalist>
+      <input id="admAmt" type="text" inputmode="numeric" placeholder="Clover ပမာဏ">
+      <button onclick="adminAdd()">➕ ဖြည့်မည်</button>
+    </div>
+    <div class="sec-title">👥 USERS</div>
+    <div id="usersList"></div>
+  </div>
+
+  <div class="sec" id="sec-orders">
+    <div class="sec-title">📦 ORDER အားလုံး</div>
+    <div id="ordersList"></div>
+  </div>
+
+  <div class="sec" id="sec-history">
+    <div class="sec-title">📋 APPROVED / REJECTED</div>
+    <div id="historyList"></div>
+  </div>
+</div>
+
+<div id="lightbox" class="hidden" onclick="closeLightbox()">
+  <button class="close" onclick="closeLightbox()">✕</button>
+  <img id="lightboxImg" src="" alt="receipt">
+</div>
+
+<div id="toast"></div>
+
+<script>
+/* =========================================================
+   🛠 Anime GAME SHOP — Admin (Firebase Live)
+   ========================================================= */
+const FIREBASE_URL = 'https://anime-game-cc46b-default-rtdb.asia-southeast1.firebasedatabase.app';
+
+let DB = { users:{}, orders:[], topups:[], notifications:[], promos:{} };
+let ADMIN_KEY = null;
+let REPORT_RANGE = 'today';
+let REFRESH_TIMER = null;
+
+/* ========== Firebase ========== */
+async function fbLoad(){
+  try{
+    const res = await fetch(FIREBASE_URL + '/shop.json');
+    const data = await res.json();
+    if(data) DB = Object.assign(DB, data);
+  }catch(e){ console.error(e); }
+  if(!DB.users) DB.users = {};
+  if(!DB.orders) DB.orders = [];
+  if(!DB.topups) DB.topups = [];
+  if(!DB.notifications) DB.notifications = [];
+  if(!DB.promos) DB.promos = {};
+
+  /* ✅ ADMIN USER AUTO-CREATE — အရေးကြီး! */
+  if(!DB.users['admin@shop.com']){
+    DB.users['admin@shop.com'] = {
+      username: 'Admin',
+      pw: 'admin12345',
+      balance: 0,
+      created: Date.now(),
+      admin: true
+    };
+    console.log('Admin user created!');
+    await fbSave();
+  }
+
+  /* ✅ Default promos — မရှိရင် ဖန်တီး */
+  if(Object.keys(DB.promos).length === 0){
+    DB.promos['WELCOME10'] = {code:'WELCOME10', discount:10, maxUses:1000, uses:0, expiry:null, active:true, created:Date.now()};
+    DB.promos['ANIME5']   = {code:'ANIME5',   discount:5,  maxUses:500,  uses:0, expiry:null, active:true, created:Date.now()};
+    await fbSave();
+  }
+}
+async function fbSave(){
+  try{
+    const data = JSON.parse(JSON.stringify(DB));
+    delete data.session;
+    const res = await fetch(FIREBASE_URL + '/shop.json', {
+      method:'PUT',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(data)
+    });
+    if(!res.ok) console.error('Save failed', res.status);
+  }catch(e){ console.error('Save error:', e); }
+}
+function startRefresh(){
+  if(REFRESH_TIMER) clearInterval(REFRESH_TIMER);
+  REFRESH_TIMER = setInterval(async ()=>{
+    if(!ADMIN_KEY) return;
+    await fbLoad();
+    renderAll();
+  }, 5000);
+}
+
+/* ========== Utils ========== */
+const $=s=>document.querySelector(s);
+const $$=s=>Array.from(document.querySelectorAll(s));
+const nf=n=>Number(n||0).toLocaleString('en-US');
+function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('on'); clearTimeout(t._tm); t._tm=setTimeout(()=>t.classList.remove('on'),2200); }
+function fmtTime(t){ return new Date(t).toLocaleString('en-GB',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}); }
+function fmtDate(t){ const d=new Date(t); return d.getDate()+'/'+(d.getMonth()+1); }
+function esc(s){ return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
+function pushNotif(user, type, title, msg){
+  if(!DB.notifications) DB.notifications = [];
+  DB.notifications.unshift({id:uid(), user, type, title, msg, time:Date.now(), read:false});
+  if(DB.notifications.length > 300) DB.notifications.length = 300;
+}
+
+/* ========== LOGIN ========== */
+async function adminLogin(){
+  const email = ($('#lgEmail').value||'').trim().toLowerCase();
+  const pw = ($('#lgPass').value||'');
+  if(!email) return toast('❌ Email ဖြည့်ပါ');
+  if(!pw) return toast('❌ Password ဖြည့်ပါ');
+
+  $('#loading').classList.remove('hidden');
+  await fbLoad();
+
+  const u = DB.users[email];
+  if(!u){ $('#loading').classList.add('hidden'); return toast('❌ Account မရှိပါ'); }
+  if(!u.admin){ $('#loading').classList.add('hidden'); return toast('❌ Admin မဟုတ်ပါ'); }
+  if(u.pw !== pw){ $('#loading').classList.add('hidden'); return toast('❌ Password မှား'); }
+
+  ADMIN_KEY = email;
+  sessionStorage.setItem('adminKey', email);
+  $('#loading').classList.add('hidden');
+  $('#login').classList.add('hidden');
+  $('#app').classList.remove('hidden');
+  renderAll();
+  startRefresh();
+  toast('✅ Admin ဝင်ပြီးပါပြီ');
+}
+function adminLogout(){
+  ADMIN_KEY = null;
+  sessionStorage.removeItem('adminKey');
+  if(REFRESH_TIMER) clearInterval(REFRESH_TIMER);
+  $('#app').classList.add('hidden');
+  $('#login').classList.remove('hidden');
+  $('#lgPass').value = 'admin12345';
+  toast('🚪 ထွက်ပြီးပါပြီ');
+}
+
+/* Auto-login */
+(async function autoLogin(){
+  $('#loading').classList.remove('hidden');
+  await fbLoad();
+  $('#loading').classList.add('hidden');
+  const k = sessionStorage.getItem('adminKey');
+  if(k && DB.users[k] && DB.users[k].admin){
+    ADMIN_KEY = k;
+    $('#login').classList.add('hidden');
+    $('#app').classList.remove('hidden');
+    renderAll();
+    startRefresh();
+  }
+})();
+
+/* ========== TABS ========== */
+function switchTab(name){
+  $$('.atabs button').forEach(b=>b.classList.toggle('active', b.dataset.tab===name));
+  $$('.sec').forEach(s=>s.classList.remove('active'));
+  document.getElementById('sec-'+name).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function setReportRange(r){
+  REPORT_RANGE = r;
+  $$('.report-range button').forEach(b=>b.classList.toggle('active', b.dataset.range===r));
+  renderReport();
+}
+
+/* ========== RENDER ========== */
+function renderAll(){
+  renderStats();
+  renderPending();
+  renderUsers();
+  renderOrders();
+  renderHistory();
+  renderReport();
+  renderPromos();
+}
+function renderStats(){
+  const pending = DB.topups.filter(t=>t.status==='pending').length;
+  const users = Object.keys(DB.users).length;
+  const orders = DB.orders.length;
+  const totalClover = Object.values(DB.users).reduce((s,u)=>s+(u.balance||0),0);
+  $('#stPending').textContent = pending;
+  $('#stUsers').textContent = users;
+  $('#stOrders').textContent = orders;
+  $('#stClover').textContent = nf(totalClover);
+  $('#cPending').textContent = pending;
+}
+
+/* ========== REPORT ========== */
+function getRangeStart(){
+  const now = new Date();
+  const d0 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const todayStart = d0.getTime();
+  const day = 86400000;
+  if(REPORT_RANGE === 'today') return todayStart;
+  if(REPORT_RANGE === 'week') return todayStart - 6*day;
+  if(REPORT_RANGE === 'month') return todayStart - 29*day;
+  return 0;
+}
+function renderReport(){
+  if(!ADMIN_KEY) return;
+  const start = getRangeStart();
+  const orders = DB.orders.filter(o=>o.time >= start);
+  const topupsApproved = DB.topups.filter(t=>t.status==='approved' && (t.approvedAt||t.time) >= start);
+  const topupsPending = DB.topups.filter(t=>t.status==='pending');
+  const revenue = orders.reduce((s,o)=>s + (o.total != null ? o.total : o.price || 0), 0);
+  const topupAmt = topupsApproved.reduce((s,t)=>s + (t.amount||0), 0);
+
+  $('#repRev').textContent = nf(revenue);
+  $('#repRevSub').textContent = 'Orders ' + orders.length + ' ခု';
+  $('#repOrders').textContent = orders.length;
+  $('#repOrdersSub').textContent = REPORT_RANGE==='today'?'ယနေ့':REPORT_RANGE==='week'?'၇ ရက်':REPORT_RANGE==='month'?'၃၀ ရက်':'အားလုံး';
+  $('#repTopup').textContent = nf(topupAmt);
+  $('#repTopupSub').textContent = topupsApproved.length + ' ခု ဖြည့်ပြီး';
+  $('#repPending').textContent = topupsPending.length;
+  $('#repPendingSub').textContent = nf(topupsPending.reduce((s,t)=>s+(t.amount||0),0)) + ' 🍀';
+
+  const day = 86400000;
+  const now = new Date();
+  const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+  const bars = [];
+  for(let i=6;i>=0;i--){
+    const s = todayStart - i*day;
+    const e = s + day;
+    const dayOrds = DB.orders.filter(o=>o.time >= s && o.time < e);
+    const dayRev = dayOrds.reduce((ss,o)=>ss + (o.total != null ? o.total : o.price || 0), 0);
+    bars.push({label: fmtDate(s), value: dayRev});
+  }
+  const maxV = Math.max(...bars.map(b=>b.value), 1);
+  $('#chartBars').innerHTML = bars.map(b=>{
+    const pct = (b.value / maxV) * 100;
+    const h = b.value > 0 ? Math.max(pct, 8) : 3;
+    return `<div class="chart-col"><div class="chart-bar" style="height:${h}%"></div><div class="chart-lbl">${b.label}</div></div>`;
+  }).join('');
+
+  const productMap = {};
+  orders.forEach(o=>{
+    const key = o.item + '|' + o.gameName;
+    if(!productMap[key]) productMap[key] = {name:o.item, game:o.gameName, count:0, revenue:0};
+    productMap[key].count++;
+    productMap[key].revenue += (o.total != null ? o.total : o.price || 0);
+  });
+  const topProducts = Object.values(productMap).sort((a,b)=>b.count - a.count).slice(0,5);
+  $('#topProducts').innerHTML = topProducts.length ? topProducts.map((p,i)=>`<div class="top-item"><div class="rank ${i===0?'r1':i===1?'r2':i===2?'r3':''}">${i+1}</div><div style="flex:1;min-width:0"><div class="tn">${esc(p.name)}</div><div class="tc">${esc(p.game)} • ${p.count} ကြိမ်</div></div><div class="tv">${nf(p.revenue)} 🍀</div></div>`).join('') : `<div class="empty" style="padding:24px"><p>Data မရှိသေးပါ</p></div>`;
+
+  const userMap = {};
+  orders.forEach(o=>{
+    if(!userMap[o.user]) userMap[o.user] = {user:o.user, count:0, spent:0, name:(DB.users[o.user]||{}).username || o.user};
+    userMap[o.user].count++;
+    userMap[o.user].spent += (o.total != null ? o.total : o.price || 0);
+  });
+  const topBuyers = Object.values(userMap).sort((a,b)=>b.spent - a.spent).slice(0,5);
+  $('#topBuyers').innerHTML = topBuyers.length ? topBuyers.map((b,i)=>`<div class="top-item"><div class="rank ${i===0?'r1':i===1?'r2':i===2?'r3':''}">${i+1}</div><div style="flex:1;min-width:0"><div class="tn">${esc(b.name)}</div><div class="tc">${b.count} orders</div></div><div class="tv">${nf(b.spent)} 🍀</div></div>`).join('') : `<div class="empty" style="padding:24px"><p>Data မရှိသေးပါ</p></div>`;
+}
+
+/* ========== PENDING ========== */
+function renderPending(){
+  const list = DB.topups.filter(t=>t.status==='pending');
+  const el = $('#pendingList');
+  if(!list.length){ el.innerHTML = `<div class="empty"><div class="e">✅</div><p>Pending မရှိပါ</p></div>`; return; }
+  el.innerHTML = list.map(t=>{
+    const usr = DB.users[t.user] || {};
+    const uname = usr.username || t.user;
+    return `<div class="card pend">
+      <div class="card-head">
+        <div class="ci">🍀</div>
+        <div class="cb">
+          <div class="ct">${esc(uname)}</div>
+          <div class="cs">📧 ${esc(t.user)}<br>💸 ${esc(t.transferName)||'-'}<br>🔖 TXN: ${esc(t.txn)||'-'}<br>🕐 ${fmtTime(t.time)}</div>
+        </div>
+        <div class="ca">+${nf(t.amount)}</div>
+      </div>
+      ${t.receipt ? `<div class="rcpt" onclick="openLightbox('${t.id}')"><img src="${t.receipt}"></div>` : ''}
+      <div class="card-actions">
+        <button class="ok" onclick="approveTopup('${t.id}')">✔ APPROVE</button>
+        <button class="no" onclick="rejectTopup('${t.id}')">✕ REJECT</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+async function approveTopup(id){
+  const t = DB.topups.find(x=>x.id===id);
+  if(!t || t.status!=='pending') return;
+  if(!DB.users[t.user]) return toast('❌ User မရှိ');
+  t.status = 'approved';
+  t.approvedAt = Date.now();
+  DB.users[t.user].balance += t.amount;
+  pushNotif(t.user, 'approve', '✅ Clover ဖြည့်ပြီးပါပြီ', nf(t.amount) + ' 🍀 သင့် balance ထဲ ရောက်ပါပြီ။');
+  $('#loading').classList.remove('hidden');
+  await fbSave();
+  $('#loading').classList.add('hidden');
+  renderAll();
+  toast('✅ Approve — ' + nf(t.amount) + ' 🍀');
+}
+async function rejectTopup(id){
+  const t = DB.topups.find(x=>x.id===id);
+  if(!t || t.status!=='pending') return;
+  if(!confirm('ဒီပြေစာကို ပယ်မှာ သေချာလား?')) return;
+  t.status = 'rejected';
+  t.rejectedAt = Date.now();
+  pushNotif(t.user, 'reject', '❌ Top-Up ပယ်ခံရပါသည်', nf(t.amount) + ' 🍀 request ကို Admin ပယ်လိုက်ပါသည်။');
+  await fbSave();
+  renderAll();
+  toast('✕ Reject');
+}
+
+/* ========== LIGHTBOX ========== */
+function openLightbox(id){
+  const t = DB.topups.find(x=>x.id===id);
+  if(!t || !t.receipt) return;
+  $('#lightboxImg').src = t.receipt;
+  $('#lightbox').classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox(){
+  $('#lightbox').classList.add('hidden');
+  document.body.style.overflow = '';
+}
+
+/* ========== USERS ========== */
+function renderUsers(){
+  const keys = Object.keys(DB.users);
+  const dl = $('#admUserList');
+  if(dl) dl.innerHTML = keys.map(k=>`<option value="${k}">`).join('');
+  const el = $('#usersList');
+  if(!keys.length){ el.innerHTML = `<div class="empty"><div class="e">👥</div><p>User မရှိပါ</p></div>`; return; }
+  keys.sort((a,b)=>{
+    const ua=DB.users[a], ub=DB.users[b];
+    if(ua.admin && !ub.admin) return -1;
+    if(!ua.admin && ub.admin) return 1;
+    return (ub.balance||0) - (ua.balance||0);
+  });
+  el.innerHTML = keys.map(k=>{
+    const u = DB.users[k];
+    const uname = u.username || 'User';
+    const initials = uname.charAt(0).toUpperCase();
+    return `<div class="usr">
+      <div class="av">${u.admin?'🛠':initials}</div>
+      <div class="ub">
+        <div class="un">${u.admin?'🛠 ':'👤 '}${esc(uname)}</div>
+        <div class="uc">${esc(k)}</div>
+      </div>
+      <div class="ubal">🍀 ${nf(u.balance)}</div>
+      <button class="badd" onclick="quickAdd('${k}')">➕</button>
+    </div>`;
+  }).join('');
+}
+async function adminAdd(){
+  const key = ($('#admUser').value||'').trim().toLowerCase();
+  const amt = parseInt(($('#admAmt').value||'').replace(/[^0-9-]/g,''),10);
+  if(!key) return toast('❌ Email/Phone ဖြည့်ပါ');
+  if(!DB.users[key]) return toast('❌ User မရှိ');
+  if(!amt || amt===0) return toast('❌ ပမာဏ မှား');
+  DB.users[key].balance = Math.max(0, (DB.users[key].balance||0) + amt);
+  pushNotif(key, 'info', '🍀 Clover ဖြည့်ပြီး', nf(amt) + ' 🍀 Admin မှ ဖြည့်ပေးပါပြီ။');
+  await fbSave();
+  $('#admAmt').value = '';
+  renderAll();
+  toast('✅ ' + (DB.users[key].username||key) + ' +' + nf(amt) + ' 🍀');
+}
+async function quickAdd(key){
+  const amt = prompt('🍀 Clover ပမာဏ:', '5000');
+  if(amt === null) return;
+  const n = parseInt(String(amt).replace(/[^0-9-]/g,''),10);
+  if(!n || isNaN(n)) return toast('❌ ပမာဏ မှား');
+  if(!DB.users[key]) return toast('❌ User မရှိ');
+  DB.users[key].balance = Math.max(0, (DB.users[key].balance||0) + n);
+  pushNotif(key, 'info', '🍀 Clover ဖြည့်ပြီး', nf(n) + ' 🍀 Admin မှ ဖြည့်ပေးပါပြီ။');
+  await fbSave();
+  renderAll();
+  toast('✅ +' + nf(n) + ' 🍀');
+}
+
+/* ========== ORDERS ========== */
+function renderOrders(){
+  const el = $('#ordersList');
+  if(!DB.orders.length){ el.innerHTML = `<div class="empty"><div class="e">📦</div><p>Order မရှိသေးပါ</p></div>`; return; }
+  el.innerHTML = DB.orders.map(o=>{
+    const usr = DB.users[o.user] || {};
+    const uname = usr.username || o.user;
+    const priceShown = o.total != null ? o.total : o.price;
+    return `<div class="card">
+      <div class="card-head">
+        <div class="ci">🎮</div>
+        <div class="cb">
+          <div class="ct">${esc(o.item)}</div>
+          <div class="cs">
+            ${esc(o.gameName)} • Player: <b style="color:#ff8fa1">${esc(o.playerId)}${o.serverId?' ('+esc(o.serverId)+')':''}</b><br>
+            👤 ${esc(uname)} (${esc(o.user)})<br>
+            ${o.promoCode?'🎁 '+esc(o.promoCode)+' • -'+nf(o.discount||0)+' 🍀<br>':''}
+            🕐 ${fmtTime(o.time)}
+          </div>
+        </div>
+        <div class="ca">-${nf(priceShown)}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ========== HISTORY ========== */
+function renderHistory(){
+  const list = DB.topups.filter(t=>t.status!=='pending');
+  const el = $('#historyList');
+  if(!list.length){ el.innerHTML = `<div class="empty"><div class="e">📋</div><p>မှတ်တမ်း မရှိ</p></div>`; return; }
+  el.innerHTML = list.map(t=>{
+    const usr = DB.users[t.user] || {};
+    const uname = usr.username || t.user;
+    const when = t.status==='approved' ? t.approvedAt : t.rejectedAt;
+    return `<div class="card">
+      <div class="card-head">
+        <div class="ci">${t.status==='approved'?'✅':'❌'}</div>
+        <div class="cb">
+          <div class="ct">${esc(uname)}</div>
+          <div class="cs">📧 ${esc(t.user)}<br>💸 ${esc(t.transferName)||'-'} • TXN: ${esc(t.txn)||'-'}<br>🕐 ${fmtTime(t.time)}${when?' • '+fmtTime(when):''}</div>
+        </div>
+        <div class="ca" style="color:${t.status==='approved'?'#25e08a':'#ff5c78'}">${t.status==='approved'?'+':''}${nf(t.amount)}</div>
+      </div>
+      ${t.receipt?`<div class="rcpt" onclick="openLightbox('${t.id}')"><img src="${t.receipt}"></div>`:''}
+    </div>`;
+  }).join('');
+}
+
+/* ========== PROMOS ========== */
+function renderPromos(){
+  const el = $('#promoList');
+  const codes = Object.keys(DB.promos);
+  if(!codes.length){ el.innerHTML = `<div class="empty"><div class="e">🎁</div><p>Promo Code မရှိသေးပါ</p></div>`; return; }
+  el.innerHTML = codes.map(c=>{
+    const p = DB.promos[c];
+    const expired = p.expiry && Date.now() > p.expiry;
+    const usedUp = p.uses >= p.maxUses;
+    const statusClass = (!p.active || expired || usedUp) ? 'off' : '';
+    return `<div class="promo-item ${statusClass}">
+      <div class="pc">
+        <div class="pcode">${esc(p.code)}</div>
+        <div class="pmeta">🎯 ${p.discount}% off • 📊 ${p.uses||0}/${p.maxUses} used<br>${p.expiry ? '📅 ' + new Date(p.expiry).toLocaleDateString('en-GB') : '📅 သက်တမ်းမကုန်'}${expired?' • <b style="color:#ff5c78">EXPIRED</b>':''}${usedUp?' • <b style="color:#ff5c78">USED UP</b>':''}</div>
+      </div>
+      <div class="pdisc">${p.discount}%</div>
+      <div class="pact">
+        <button class="toggle ${p.active?'':'off'}" onclick="togglePromo('${esc(c)}')">${p.active?'● ON':'○ OFF'}</button>
+        <button class="del" onclick="deletePromo('${esc(c)}')">🗑</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+async function createPromo(){
+  const code = ($('#prCode').value||'').trim().toUpperCase();
+  const disc = parseInt(($('#prDiscount').value||'').replace(/[^0-9]/g,''),10);
+  const max  = parseInt(($('#prMax').value||'').replace(/[^0-9]/g,''),10);
+  const exp  = $('#prExpiry').value;
+  if(!code || code.length < 3) return toast('❌ Code ၃ လုံးအထက်');
+  if(!/^[A-Z0-9]+$/.test(code)) return toast('❌ Code မှာ A-Z, 0-9 သာ');
+  if(!disc || disc < 1 || disc > 90) return toast('❌ Discount 1-90%');
+  if(!max || max < 1) return toast('❌ Max Uses 1 အထက်');
+  if(DB.promos[code]) return toast('❌ Code ရှိပြီးသား');
+  const expiry = exp ? new Date(exp + 'T23:59:59').getTime() : null;
+  DB.promos[code] = {code, discount:disc, maxUses:max, uses:0, expiry, active:true, created:Date.now()};
+  await fbSave();
+  renderPromos();
+  $('#prCode').value=''; $('#prDiscount').value=''; $('#prMax').value=''; $('#prExpiry').value='';
+  toast('✅ Promo ' + code + ' ဖန်တီးပြီးပါပြီ');
+}
+async function togglePromo(code){
+  const p = DB.promos[code];
+  if(!p) return;
+  p.active = !p.active;
+  await fbSave();
+  renderPromos();
+  toast(p.active ? '✅ ' + code + ' ON' : '⏸ ' + code + ' OFF');
+}
+async function deletePromo(code){
+  if(!confirm('Promo ' + code + ' ဖျက်မှာ သေချာလား?')) return;
+  delete DB.promos[code];
+  await fbSave();
+  renderPromos();
+  toast('🗑 ဖျက်ပြီးပါပြီ');
+}
+
+/* ========== Events ========== */
+document.addEventListener('keydown', e=>{
+  if(e.key === 'Enter' && !$('#login').classList.contains('hidden')) adminLogin();
+  if(e.key === 'Escape') closeLightbox();
+});
+
+/* Exports for inline handlers */
+window.adminLogin = adminLogin;
+window.adminLogout = adminLogout;
+window.switchTab = switchTab;
+window.setReportRange = setReportRange;
+window.approveTopup = approveTopup;
+window.rejectTopup = rejectTopup;
+window.openLightbox = openLightbox;
+window.closeLightbox = closeLightbox;
+window.adminAdd = adminAdd;
+window.quickAdd = quickAdd;
+window.createPromo = createPromo;
+window.togglePromo = togglePromo;
+window.deletePromo = deletePromo;
+</script>
+</body>
+</html>
