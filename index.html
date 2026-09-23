@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#050506">
+<title>🍀 Anime GAME SHOP</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,4 90,27 90,73 50,96 10,73 10,27' fill='none' stroke='%23ff1f3d' stroke-width='5'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle'%3E🍀%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
+html,body{height:100%}
+body{background:#050506;background-image:radial-gradient(circle at 50% -12%,rgba(255,31,61,.16),transparent 55%),radial-gradient(circle at 50% 115%,rgba(255,31,61,.10),transparent 55%);background-attachment:fixed;color:#ececf0;font-family:'Poppins','Padauk','Noto Sans Myanmar',system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:0;height:0}
+button,input{font-family:inherit;outline:none;border:none;cursor:pointer}
+.hidden{display:none !important}
+@keyframes logoFade{from{opacity:0;transform:scale(.9) translateY(14px)}to{opacity:1;transform:none}}
+@keyframes markPulse{0%,100%{filter:drop-shadow(0 0 14px rgba(255,31,61,.7))}50%{filter:drop-shadow(0 0 28px rgba(255,31,61,1))}}
+@keyframes cloverFloat{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-5px) rotate(4deg)}}
+@keyframes shineSweep{0%,100%{background-position:-150% 0}50%{background-position:250% 0}}
+@keyframes pFloat1{0%,100%{transform:translate(0,0);opacity:.4}50%{transform:translate(30px,-30px);opacity:.8}}
+@keyframes pFloat2{0%,100%{transform:translate(0,0);opacity:.3}50%{transform:translate(-40px,25px);opacity:.7}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
+@keyframes bellShake{0%,100%{transform:rotate(0)}25%{transform:rotate(-12deg)}75%{transform:rotate(12deg)}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:none}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.brand-logo{display:flex;flex-direction:column;align-items:center;gap:16px;animation:logoFade 1s cubic-bezier(.2,.9,.3,1)}
+.logo-mark-min{position:relative;width:96px;height:96px;display:flex;align-items:center;justify-content:center;animation:markPulse 3.4s ease-in-out infinite}
+.logo-mark-min svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.logo-mark-min .hex-glow{fill:url(#hexGrad);opacity:.4}
+.logo-mark-min .hex-border{fill:none;stroke:#ff1f3d;stroke-width:1.8;filter:drop-shadow(0 0 5px rgba(255,31,61,.9))}
+.logo-mark-min .clover{position:relative;z-index:2;font-size:36px;line-height:1;filter:drop-shadow(0 0 10px rgba(255,31,61,.95));animation:cloverFloat 3.2s ease-in-out infinite}
+.logo-wordmark-min{display:flex;flex-direction:column;align-items:center;gap:6px}
+.lw-line{display:flex;align-items:baseline;gap:10px;font-family:'Orbitron',sans-serif;font-weight:900;letter-spacing:3.5px;line-height:1}
+.lw-line .anime{font-size:21px;color:#fff;text-shadow:0 0 12px rgba(255,255,255,.35)}
+.lw-line .shop{font-size:21px;color:#ff1f3d;text-shadow:0 0 10px #ff1f3d,0 0 24px #ff1f3d,0 0 44px rgba(255,31,61,.6);position:relative}
+.lw-line .shop::after{content:'SHOP';position:absolute;inset:0;background:linear-gradient(100deg,transparent 0%,transparent 40%,rgba(255,255,255,.98) 50%,transparent 60%,transparent 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shineSweep 3.4s ease-in-out infinite;pointer-events:none}
+.logo-tagline-min{display:flex;align-items:center;gap:9px;font-size:9.5px;letter-spacing:5px;color:#8b8b96;font-weight:700;margin-top:3px}
+.logo-tagline-min::before,.logo-tagline-min::after{content:'';width:26px;height:1px;background:linear-gradient(90deg,transparent,#ff1f3d,transparent)}
+.mini-logo{position:relative;width:38px;height:38px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.mini-logo svg{position:absolute;inset:0;width:100%;height:100%}
+.mini-logo .hex-border-sm{fill:none;stroke:#ff1f3d;stroke-width:2.2;filter:drop-shadow(0 0 6px rgba(255,31,61,.9))}
+.mini-logo .clover-sm{position:relative;z-index:2;font-size:16px;line-height:1;filter:drop-shadow(0 0 7px rgba(255,31,61,1))}
+#splash{position:fixed;inset:0;z-index:9999;background:#000;display:flex;align-items:center;justify-content:center;transition:opacity .55s;overflow:hidden}
+#splash.out{opacity:0;pointer-events:none}
+.particle{position:absolute;border-radius:50%;background:radial-gradient(circle,#ff1f3d 0%,transparent 70%);pointer-events:none;filter:blur(.5px)}
+.p1{width:220px;height:220px;top:8%;left:5%;animation:pFloat1 9s ease-in-out infinite}
+.p2{width:300px;height:300px;bottom:5%;right:-30px;animation:pFloat2 11s ease-in-out infinite}
+.p3{width:160px;height:160px;top:55%;right:8%;animation:pFloat1 8s ease-in-out infinite}
+.p4{width:120px;height:120px;bottom:20%;left:-20px;animation:pFloat2 10s 1s ease-in-out infinite}
+.tap-hint{margin-top:48px;font-size:12px;color:#ff1f3d;letter-spacing:3.5px;font-weight:800;border:1.5px solid rgba(255,31,61,.55);border-radius:40px;padding:12px 28px;display:inline-block;font-family:'Orbitron',sans-serif;box-shadow:0 0 20px rgba(255,31,61,.35),inset 0 0 18px rgba(255,31,61,.1);animation:blink 1.6s infinite}
+#auth{position:fixed;inset:0;z-index:900;background:#050506;display:flex;align-items:center;justify-content:center;padding:18px;overflow-y:auto}
+.auth-card{width:100%;max-width:400px;background:linear-gradient(180deg,#0e0e12,#08080b);border:1px solid #1d1d24;border-radius:22px;padding:26px 20px 22px;box-shadow:0 0 40px rgba(255,31,61,.14),0 20px 50px rgba(0,0,0,.8);margin:auto}
+.auth-brand{display:flex;flex-direction:column;align-items:center;margin-bottom:22px}
+.tabs{display:flex;background:#111116;border-radius:14px;padding:4px;margin-bottom:18px;border:1px solid #1c1c22}
+.tabs button{flex:1;padding:11px;border-radius:11px;background:transparent;color:#8b8b96;font-size:13px;font-weight:800;transition:.25s;font-family:'Orbitron',sans-serif;letter-spacing:.8px}
+.tabs button.active{background:linear-gradient(135deg,#ff1f3d,#c10026);color:#fff;box-shadow:0 0 16px rgba(255,31,61,.5)}
+.fld{display:block;margin-bottom:13px}
+.fld span{display:block;font-size:12px;color:#9a9aa6;margin-bottom:7px;font-weight:600}
+.fld input{width:100%;padding:14px 15px;background:#101014;border:1px solid #202028;border-radius:13px;color:#fff;font-size:14.5px;transition:.2s}
+.fld input:focus{border-color:#ff1f3d;box-shadow:0 0 0 3px rgba(255,31,61,.13);background:#141419}
+.btn-primary{width:100%;padding:15px;border-radius:14px;margin-top:6px;font-size:13.5px;font-weight:800;letter-spacing:1.5px;background:linear-gradient(135deg,#ff1f3d,#a80020);color:#fff;box-shadow:0 0 22px rgba(255,31,61,.45);transition:.2s;font-family:'Orbitron',sans-serif}
+.btn-primary:active{transform:scale(.97)}
+.auth-note{text-align:center;font-size:11px;color:#6d6d78;margin-top:15px;line-height:1.7}
+.botbox{background:#0f0f13;border:1px dashed rgba(255,31,61,.4);border-radius:13px;padding:13px;margin-bottom:13px}
+.botbox .q{font-size:13px;color:#ff8fa1;font-weight:800;margin-bottom:10px;line-height:1.5}
+.botbox .q em{color:#fff;font-style:normal;font-size:15px}
+.botgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.botcell{position:relative;aspect-ratio:1/1;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#17171d,#0e0e13);border:1.5px solid #26262e;font-size:30px;transition:.18s;user-select:none;cursor:pointer}
+.botcell.sel{border-color:#ff1f3d;background:linear-gradient(160deg,#3a0710,#1a0208);box-shadow:0 0 18px rgba(255,31,61,.55)}
+.botcell.sel::after{content:'✓';position:absolute;top:4px;right:6px;color:#ff1f3d;font-size:13px;font-weight:900}
+.botbox .refresh{margin-top:10px;background:transparent;color:#ff5c78;font-size:11.5px;font-weight:800;padding:4px 0}
+#app{max-width:480px;margin:0 auto;min-height:100vh;padding-bottom:92px;position:relative}
+.topbar{position:sticky;top:0;z-index:60;background:rgba(5,5,6,.92);backdrop-filter:blur(14px);border-bottom:1px solid #16161c;padding:12px 14px;display:flex;align-items:center;gap:10px}
+.topbar .brand{display:flex;align-items:center;gap:11px;flex:1;min-width:0}
+.topbar .tb-text{min-width:0;overflow:hidden}
+.topbar h1{font-family:'Orbitron',sans-serif;font-size:12.5px;font-weight:900;letter-spacing:1.8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1}
+.topbar h1 span{color:#ff1f3d;text-shadow:0 0 10px rgba(255,31,61,.9)}
+.topbar .tb-text p{font-size:8px;color:#6d6d78;letter-spacing:2px;margin-top:4px;font-weight:700}
+.bal-chip{display:flex;align-items:center;gap:5px;background:#111116;border:1px solid rgba(255,31,61,.35);padding:7px 12px;border-radius:30px;font-size:12.5px;font-weight:800;color:#fff;box-shadow:0 0 13px rgba(255,31,61,.22);white-space:nowrap;font-family:'Orbitron',sans-serif}
+.bal-chip b{color:#ff5c78}
+.bell-btn{position:relative;width:38px;height:38px;flex-shrink:0;border-radius:50%;background:#111116;border:1px solid #24242c;display:flex;align-items:center;justify-content:center;font-size:17px;transition:.2s;cursor:pointer}
+.bell-btn:active{transform:scale(.92)}
+.bell-btn.has-unread{animation:bellShake .6s ease-in-out;border-color:rgba(255,31,61,.6);box-shadow:0 0 14px rgba(255,31,61,.4)}
+.bell-badge{position:absolute;top:-3px;right:-3px;min-width:18px;height:18px;padding:0 5px;border-radius:10px;background:#ff1f3d;color:#fff;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;border:2px solid #050506;font-family:'Orbitron',sans-serif}
+.bell-badge.hidden{display:none}
+.notif-panel{position:fixed;top:62px;left:50%;transform:translateX(-50%);width:calc(100% - 28px);max-width:452px;max-height:70vh;background:#0a0a0d;border:1px solid #1e1e26;border-radius:18px;box-shadow:0 18px 50px rgba(0,0,0,.85);z-index:200;overflow:hidden;animation:slideDown .28s}
+.notif-head{padding:14px 16px;border-bottom:1px solid #1a1a22;display:flex;align-items:center;gap:9px;background:linear-gradient(180deg,#14141a,#0d0d11)}
+.notif-head h3{flex:1;font-size:13px;font-family:'Orbitron',sans-serif;letter-spacing:1px;color:#fff}
+.notif-head .cnt{font-size:10px;background:#ff1f3d;color:#fff;padding:2px 8px;border-radius:20px;font-weight:900;font-family:'Orbitron',sans-serif}
+.notif-head .mark-btn{font-size:10px;background:transparent;color:#ff5c78;font-weight:800;padding:5px 9px;border-radius:20px;border:1px solid rgba(255,31,61,.35)}
+.notif-body{max-height:calc(70vh - 55px);overflow-y:auto;padding:6px}
+.notif-item{padding:12px 13px;border-radius:13px;display:flex;gap:11px;align-items:flex-start;margin-bottom:3px;cursor:pointer}
+.notif-item.unread{background:linear-gradient(135deg,#16080c,#0d0d11);border:1px solid rgba(255,31,61,.2)}
+.notif-item:active{background:#141419}
+.notif-item .ni-ic{font-size:20px;line-height:1;flex-shrink:0;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#181820;border:1px solid #23232c}
+.notif-item.unread .ni-ic{border-color:rgba(255,31,61,.5);background:#1c0b10}
+.notif-item .ni-b{flex:1;min-width:0}
+.notif-item .ni-t{font-size:12.5px;font-weight:800;color:#fff;line-height:1.3}
+.notif-item .ni-s{font-size:11px;color:#9a9aa6;margin-top:4px;line-height:1.5;word-break:break-word}
+.notif-item .ni-time{font-size:9.5px;color:#5d5d68;margin-top:5px}
+.notif-item .ni-dot{width:7px;height:7px;border-radius:50%;background:#ff1f3d;box-shadow:0 0 8px #ff1f3d;flex-shrink:0;margin-top:10px}
+.notif-empty{text-align:center;padding:44px 20px;color:#5d5d68}
+.notif-empty .e{font-size:38px;opacity:.35;margin-bottom:10px}
+.page{display:none;padding:14px;animation:fade .3s ease}
+.page.active{display:block}
+.sec-title{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:800;margin:20px 0 11px;letter-spacing:.8px;font-family:'Orbitron',sans-serif}
+.sec-title::before{content:'';width:3.5px;height:16px;border-radius:4px;background:#ff1f3d;box-shadow:0 0 10px #ff1f3d}
+.sec-title small{margin-left:auto;font-size:10.5px;color:#6d6d78;font-weight:600}
+.hero{position:relative;border-radius:20px;padding:20px;overflow:hidden;background:linear-gradient(135deg,#16070b,#0a0a0e 55%);border:1px solid rgba(255,31,61,.3);box-shadow:0 0 28px rgba(255,31,61,.16)}
+.hero::after{content:'';position:absolute;width:180px;height:180px;right:-70px;top:-80px;border-radius:50%;background:radial-gradient(circle,rgba(255,31,61,.4),transparent 70%)}
+.hero .lbl{font-size:11.5px;color:#ff8fa1;letter-spacing:2px;font-weight:700;position:relative}
+.hero .amt{font-size:32px;font-weight:900;margin:8px 0 3px;position:relative;text-shadow:0 0 20px rgba(255,31,61,.55);font-family:'Orbitron',sans-serif}
+.hero .amt small{font-size:14px;color:#8b8b96;font-weight:600}
+.hero .sub{font-size:11px;color:#6d6d78;position:relative}
+.hero .row{display:flex;gap:9px;margin-top:15px;position:relative}
+.hero .row button{flex:1;padding:11px;border-radius:12px;font-size:11.5px;font-weight:800;background:linear-gradient(135deg,#ff1f3d,#a80020);color:#fff;box-shadow:0 0 15px rgba(255,31,61,.38);letter-spacing:1px;font-family:'Orbitron',sans-serif}
+.hero .row button.ghost{background:#141419;border:1px solid #24242c;color:#d8d8e0;box-shadow:none}
+.rail{display:flex;gap:11px;overflow-x:auto;padding:2px 0 6px}
+.rail::-webkit-scrollbar{display:none}
+.banner{min-width:212px;height:112px;border-radius:17px;position:relative;overflow:hidden;border:1px solid #1e1e26;display:flex;align-items:center;padding:14px;cursor:pointer}
+.banner .emo{position:absolute;right:8px;bottom:2px;font-size:60px;opacity:.32}
+.banner .txt{position:relative;z-index:2}
+.banner .txt small{font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.75);font-weight:700}
+.banner .txt h3{font-size:16px;font-weight:900;color:#fff;margin-top:3px;font-family:'Orbitron',sans-serif;letter-spacing:1px}
+.banner .txt p{font-size:10px;color:rgba(255,255,255,.65);margin-top:4px}
+.b1{background:linear-gradient(120deg,#3a2a00,#7a5a00 60%,#1a1200)}
+.b2{background:linear-gradient(120deg,#001c3a,#00509e 60%,#00101f)}
+.b3{background:linear-gradient(120deg,#3a0f00,#c23a00 60%,#1a0700)}
+.b4{background:linear-gradient(120deg,#2a0030,#8a0080 60%,#12001a)}
+.ggrid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.gcard{background:linear-gradient(160deg,#101015,#0a0a0e);border:1px solid #1e1e26;border-radius:17px;padding:15px 13px;text-align:center;transition:.22s;position:relative;overflow:hidden;cursor:pointer}
+.gcard:active{transform:scale(.965);border-color:#ff1f3d}
+.gcard .gic{font-size:34px;line-height:1.2}
+.gcard .gn{font-size:12px;font-weight:800;margin-top:8px;letter-spacing:.8px;font-family:'Orbitron',sans-serif}
+.gcard .gc{font-size:9.5px;color:#ff5c78;margin-top:4px;font-weight:700}
+.gcard .gt{font-size:9.5px;color:#6d6d78;margin-top:5px}
+.gcard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#ff1f3d,transparent);opacity:.75}
+.wave-card{border-radius:19px;padding:18px;background:linear-gradient(135deg,#140509,#0a0a0e);border:1px solid rgba(255,31,61,.32)}
+.wave-card .head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.wave-card .head .w{font-size:26px}
+.wave-card .head h3{font-size:13.5px;font-weight:900;font-family:'Orbitron',sans-serif;letter-spacing:1.2px}
+.wave-card .head p{font-size:10.5px;color:#7c7c88;margin-top:2px}
+.kv{display:flex;align-items:center;justify-content:space-between;background:#101014;border:1px solid #1e1e26;border-radius:13px;padding:13px 14px;margin-bottom:9px}
+.kv .k{font-size:11.5px;color:#8b8b96;font-weight:600}
+.kv .v{font-size:14.5px;font-weight:900;color:#fff;display:flex;align-items:center;gap:8px}
+.copyable{cursor:pointer;border-bottom:1px dashed rgba(255,31,61,.6);padding-bottom:1px}
+.tapcopy{font-size:9.5px;color:#ff5c78;background:rgba(255,31,61,.13);padding:3px 8px;border-radius:20px;font-weight:700}
+.note{font-size:11.5px;color:#8b8b96;line-height:1.85;background:#0d0d11;border-left:3px solid #ff1f3d;border-radius:0 11px 11px 0;padding:11px 13px;margin-top:12px}
+.hitem{background:#0d0d12;border:1px solid #1c1c24;border-radius:15px;padding:13px 14px;margin-bottom:9px;display:flex;gap:11px;align-items:flex-start}
+.hitem .hi-ic{font-size:22px;line-height:1}
+.hitem .hi-b{flex:1;min-width:0}
+.hitem .hi-t{font-size:13px;font-weight:800}
+.hitem .hi-s{font-size:10.5px;color:#7c7c88;margin-top:4px;line-height:1.6;word-break:break-all}
+.hitem .hi-r{text-align:right;white-space:nowrap}
+.hitem .hi-p{font-size:13px;font-weight:900;color:#ff5c78;font-family:'Orbitron',sans-serif}
+.badge{display:inline-block;font-size:9px;padding:3px 8px;border-radius:20px;font-weight:800;margin-top:6px;font-family:'Orbitron',sans-serif;letter-spacing:.5px}
+.badge.ok{background:rgba(0,200,120,.14);color:#25e08a;border:1px solid rgba(0,200,120,.3)}
+.badge.pd{background:rgba(255,190,0,.13);color:#ffc42e;border:1px solid rgba(255,190,0,.3)}
+.badge.no{background:rgba(255,31,61,.13);color:#ff5c78;border:1px solid rgba(255,31,61,.3)}
+.empty{text-align:center;padding:52px 20px;color:#5d5d68}
+.empty .e{font-size:44px;opacity:.4;margin-bottom:12px}
+.empty p{font-size:13px}
+.acct-head{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,#12060a,#0a0a0e);border:1px solid rgba(255,31,61,.28);border-radius:19px;padding:18px}
+.avatar{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;background:linear-gradient(135deg,#ff1f3d,#7a0018);font-weight:900;color:#fff;flex-shrink:0;font-family:'Orbitron',sans-serif}
+.acct-head .n{font-size:15.5px;font-weight:900}
+.acct-head .r{font-size:11px;color:#ff5c78;margin-top:4px;font-weight:700}
+.acct-head .c{font-size:10.5px;color:#8b8b96;margin-top:4px;word-break:break-all}
+.menu{background:#0d0d12;border:1px solid #1c1c24;border-radius:16px;overflow:hidden;margin-top:14px}
+.menu button{width:100%;display:flex;align-items:center;gap:12px;padding:15px;background:transparent;color:#ececf0;font-size:13px;font-weight:700;border-bottom:1px solid #17171e;text-align:left}
+.menu button:last-child{border-bottom:none}
+.menu button:active{background:#141419}
+.menu button .mi{font-size:18px;width:24px;text-align:center}
+.menu button .ar{margin-left:auto;color:#4d4d58;font-size:15px}
+.menu button.danger{color:#ff5c78}
+.bnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;z-index:80;background:rgba(8,8,10,.96);backdrop-filter:blur(16px);border-top:1px solid #16161c;display:flex;padding:8px 6px calc(8px + env(safe-area-inset-bottom))}
+.bnav button{flex:1;background:transparent;color:#5d5d68;display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 2px;border-radius:13px;font-size:9.5px;font-weight:700;transition:.2s}
+.bnav button .ni{font-size:19px;line-height:1;transition:.2s}
+.bnav button.active{color:#ff1f3d}
+.bnav button.active .ni{transform:translateY(-2px) scale(1.12)}
+.modal{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.88);backdrop-filter:blur(7px);display:flex;align-items:flex-end;justify-content:center}
+.modal-card{width:100%;max-width:480px;max-height:92vh;overflow-y:auto;background:#0a0a0d;border-radius:24px 24px 0 0;border:1px solid #1e1e26;border-bottom:none;animation:slideUp .3s;padding-bottom:24px}
+.modal-head{position:sticky;top:0;z-index:5;background:rgba(10,10,13,.97);backdrop-filter:blur(10px);display:flex;align-items:center;gap:10px;padding:16px 16px 13px;border-bottom:1px solid #1a1a22}
+.modal-head h3{flex:1;font-size:13px;font-weight:900;line-height:1.4;font-family:'Orbitron',sans-serif;letter-spacing:.8px}
+.modal-head button{width:32px;height:32px;border-radius:50%;background:#17171e;color:#9a9aa6;font-size:15px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.modal-body{padding:15px 15px 0}
+.modal-hint{text-align:center;font-size:10.5px;color:#5d5d68;padding:12px 0 4px}
+.grp-title{font-size:11.5px;font-weight:900;color:#ff5c78;margin:18px 0 10px;letter-spacing:1.2px;display:flex;align-items:center;gap:8px;font-family:'Orbitron',sans-serif}
+.grp-title:first-child{margin-top:4px}
+.grp-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(255,31,61,.4),transparent)}
+.pkg-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.pkg{background:linear-gradient(160deg,#101016,#0b0b0f);border:1px solid #1e1e26;border-radius:14px;padding:13px 11px;text-align:left;transition:.18s;color:#ececf0}
+.pkg:active{transform:scale(.96);border-color:#ff1f3d}
+.pkg .pn{font-size:13px;font-weight:800;line-height:1.35}
+.pkg .ps{font-size:9.5px;color:#7c7c88;margin-top:3px}
+.pkg .pp{font-size:12px;font-weight:900;color:#ff5c78;margin-top:8px;font-family:'Orbitron',sans-serif}
+.order-head{display:flex;gap:13px;align-items:center;background:linear-gradient(135deg,#150609,#0c0c11);border:1px solid rgba(255,31,61,.3);border-radius:16px;padding:15px;margin-bottom:16px}
+.order-head .oi{font-size:34px}
+.order-head .on{font-size:14px;font-weight:900}
+.order-head .os{font-size:10.5px;color:#8b8b96;margin-top:4px}
+.promo-box{background:linear-gradient(135deg,#1a0f04,#0e0a04);border:1px dashed rgba(255,190,0,.4);border-radius:13px;padding:12px;margin-bottom:12px}
+.promo-box .plabel{font-size:11px;color:#ffc42e;font-weight:800;margin-bottom:9px;letter-spacing:.6px}
+.promo-row{display:flex;gap:8px}
+.promo-row input{flex:1;padding:11px 13px;background:#141419;border:1px solid #202028;border-radius:11px;color:#fff;font-size:13.5px;text-transform:uppercase;letter-spacing:1px;font-weight:800}
+.promo-row input:focus{border-color:#ffc42e}
+.promo-row button{padding:0 16px;border-radius:11px;background:linear-gradient(135deg,#ffc42e,#c99000);color:#0a0a0d;font-size:12px;font-weight:900;font-family:'Orbitron',sans-serif}
+.promo-applied{background:rgba(0,200,120,.1);border:1px solid rgba(0,200,120,.35);border-radius:11px;padding:10px 13px;display:flex;align-items:center;gap:10px;margin-top:10px}
+.promo-applied .pi{font-size:18px}
+.promo-applied .pb{flex:1}
+.promo-applied .pn{font-size:12px;font-weight:900;color:#25e08a;letter-spacing:.8px}
+.promo-applied .ps{font-size:10.5px;color:#8b8b96;margin-top:2px}
+.promo-applied .px{background:transparent;color:#ff5c78;font-size:15px;font-weight:900;padding:0 6px}
+.summary{background:#0e0e13;border:1px solid #1c1c24;border-radius:16px;padding:15px;margin:16px 0}
+.summary h4{font-size:11px;color:#ff5c78;letter-spacing:1.5px;margin-bottom:12px;font-weight:900;font-family:'Orbitron',sans-serif}
+.srow{display:flex;justify-content:space-between;gap:12px;font-size:12.5px;padding:7px 0;color:#9a9aa6}
+.srow b{color:#fff;font-weight:800;text-align:right;word-break:break-all}
+.srow.discount b{color:#25e08a}
+.srow.total{border-top:1px dashed #26262e;margin-top:8px;padding-top:12px;font-size:14px}
+.srow.total b{color:#ff5c78;font-size:17px;font-family:'Orbitron',sans-serif}
+.srow.warn b{color:#ffc42e}
+.btn-buy{width:100%;padding:16px;border-radius:15px;font-size:13px;font-weight:900;letter-spacing:1.8px;background:linear-gradient(135deg,#ff1f3d,#a80020);color:#fff;margin-top:4px;font-family:'Orbitron',sans-serif}
+.btn-buy:active{transform:scale(.97)}
+.btn-buy:disabled{opacity:.45}
+.adm-box{background:#0e0e13;border:1px solid #1c1c24;border-radius:15px;padding:14px;margin-bottom:12px}
+.adm-box h4{font-size:11.5px;color:#ff5c78;font-weight:900;margin-bottom:11px;font-family:'Orbitron',sans-serif}
+.adm-box input{width:100%;padding:12px 13px;background:#141419;border:1px solid #202028;border-radius:11px;color:#fff;font-size:13.5px;margin-bottom:9px}
+.adm-box button{width:100%;padding:12px;border-radius:11px;background:linear-gradient(135deg,#ff1f3d,#a80020);color:#fff;font-weight:800;font-size:12.5px;font-family:'Orbitron',sans-serif}
+.file-btn{position:relative;width:100%;padding:14px;border-radius:13px;background:#101014;border:1.5px dashed #2a2a34;color:#9a9aa6;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;text-align:center}
+.file-btn.has{border-style:solid;border-color:rgba(255,31,61,.55);color:#ff8fa1;background:#160a0e}
+.file-btn input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.file-preview{margin-top:9px;border-radius:13px;overflow:hidden;border:1px solid #23232c;background:#000}
+.file-preview img{width:100%;max-height:200px;object-fit:contain;display:block}
+#toast{position:fixed;left:50%;bottom:108px;transform:translateX(-50%) translateY(24px);z-index:99999;background:rgba(16,16,20,.97);border:1px solid rgba(255,31,61,.45);color:#fff;padding:12px 20px;border-radius:30px;font-size:12.5px;font-weight:700;opacity:0;pointer-events:none;transition:.3s;max-width:88%;text-align:center}
+#toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+#loading{position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,.85);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-family:'Orbitron',sans-serif;font-size:13px;letter-spacing:2px;gap:16px}
+#loading .sp{width:44px;height:44px;border:3px solid rgba(255,31,61,.2);border-top-color:#ff1f3d;border-radius:50%;animation:spin 1s linear infinite}
+</style>
+</head>
+<body>
+
+<div id="splash">
+  <div class="particle p1"></div><div class="particle p2"></div>
+  <div class="particle p3"></div><div class="particle p4"></div>
+  <div style="text-align:center;padding:20px;position:relative;z-index:2">
+    <div class="brand-logo">
+      <div class="logo-mark-min">
+        <svg viewBox="0 0 100 100">
+          <defs><radialGradient id="hexGrad" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ff1f3d" stop-opacity="1"/><stop offset="100%" stop-color="#ff1f3d" stop-opacity="0"/></radialGradient></defs>
+          <polygon class="hex-glow" points="50,4 90,27 90,73 50,96 10,73 10,27"/>
+          <polygon class="hex-border" points="50,4 90,27 90,73 50,96 10,73 10,27"/>
+        </svg>
+        <div class="clover">🍀</div>
+      </div>
+      <div class="logo-wordmark-min">
+        <div class="lw-line"><span class="anime">ANIME</span><span class="shop">SHOP</span></div>
+        <div class="logo-tagline-min">GAME TOP UP</div>
+      </div>
+    </div>
+    <div class="tap-hint">👆 TAP TO ENTER</div>
+  </div>
+</div>
+
+<div id="loading" class="hidden"><div class="sp"></div><div>LOADING...</div></div>
+
+<div id="auth" class="hidden">
+  <div class="auth-card">
+    <div class="auth-brand">
+      <div class="logo-mark-min" style="width:76px;height:76px">
+        <svg viewBox="0 0 100 100">
+          <polygon class="hex-glow" points="50,4 90,27 90,73 50,96 10,73 10,27"/>
+          <polygon class="hex-border" points="50,4 90,27 90,73 50,96 10,73 10,27"/>
+        </svg>
+        <div class="clover" style="font-size:28px">🍀</div>
+      </div>
+      <div class="lw-line" style="margin-top:12px"><span class="anime" style="font-size:14px">ANIME</span><span class="shop" style="font-size:14px">SHOP</span></div>
+      <div class="logo-tagline-min" style="margin-top:8px">MLBB · PUBG · FF · MCGG</div>
+    </div>
+    <div class="tabs"><button id="tabLogin" class="active">LOGIN</button><button id="tabReg">REGISTER</button></div>
+    <div class="fld"><span>📧 Email (သို့) 📱 Phone</span><input id="auContact" type="text" placeholder="email@example.com / 09xxxxxxxxx" autocomplete="off"></div>
+    <div class="fld hidden" id="regUserWrap"><span>👤 Username</span><input id="auName" type="text" placeholder="ဥပမာ Player123" autocomplete="off"></div>
+    <div class="fld"><span>🔒 Password</span><input id="auPass" type="password" placeholder="Password (8 လုံးအထက်)"></div>
+    <div id="regOnly" class="hidden">
+      <div class="fld"><span>🔒 Confirm Password</span><input id="auPass2" type="password" placeholder="Password ပြန်ရိုက်ပါ"></div>
+      <div class="botbox">
+        <div class="q" id="botQ">🤖 Bot Check</div>
+        <div class="botgrid" id="botGrid"></div>
+        <button type="button" class="refresh" id="botRefresh">🔄 ပုံအသစ် ရွေးရန်</button>
+      </div>
+    </div>
+    <button id="authBtn" class="btn-primary">LOGIN</button>
+    <div class="auth-note">🔑 Login — <b style="color:#ff5c78">Email/Phone + Password</b><br>🆕 Register — Username ပါ ထည့်ရပါမည်</div>
+  </div>
+</div>
+
+<div id="app" class="hidden">
+  <div class="topbar">
+    <div class="brand">
+      <div class="mini-logo"><svg viewBox="0 0 100 100"><polygon class="hex-border-sm" points="50,6 88,28 88,72 50,94 12,72 12,28"/></svg><div class="clover-sm">🍀</div></div>
+      <div class="tb-text"><h1>ANIME <span>SHOP</span></h1><p>GAME TOP UP</p></div>
+    </div>
+    <div class="bell-btn" id="bellBtn" onclick="toggleNotif()">🔔<div class="bell-badge hidden" id="bellBadge">0</div></div>
+    <div class="bal-chip">🍀 <b id="topBal">0</b></div>
+  </div>
+
+  <div class="page active" id="page-home">
+    <div class="hero">
+      <div class="lbl">🍀 CLOVER BALANCE</div>
+      <div class="amt" id="homeBal">0 <small>🍀</small></div>
+      <div class="sub" id="homeUser">Welcome back</div>
+      <div class="row"><button onclick="go('coin')">💎 TOP UP</button><button class="ghost" onclick="go('history')">📋 HISTORY</button></div>
+    </div>
+    <div class="sec-title">🔥 COLLAB <small>swipe →</small></div>
+    <div class="rail">
+      <div class="banner b1" onclick="openGame('pubg')"><div class="emo">🎯</div><div class="txt"><small>PUBG MOBILE</small><h3>× YONO</h3><p>UC Top Up</p></div></div>
+      <div class="banner b2" onclick="openGame('mlbb')"><div class="emo">⚔️</div><div class="txt"><small>MOBILE LEGENDS</small><h3>× ASTA</h3><p>Diamonds</p></div></div>
+      <div class="banner b3" onclick="openGame('ff')"><div class="emo">🔥</div><div class="txt"><small>FREE FIRE</small><h3>× NAUTO</h3><p>Diamond</p></div></div>
+      <div class="banner b4" onclick="openGame('mcgg')"><div class="emo">👒</div><div class="txt"><small>MCGG</small><h3>× LUFFY</h3><p>Diamond</p></div></div>
+    </div>
+    <div class="sec-title">🎮 GAME TOP UP</div>
+    <div class="ggrid" id="homeGames"></div>
+    <div class="sec-title">💎 MLBB HOT</div>
+    <div class="pkg-grid" id="homeHot"></div>
+    <div class="note">⚡ <b style="color:#ff5c78">Direct Payment System</b> — Clover 🍀 မှ တိုက်ရိုက်နုတ်ယူ။<br>🎁 Promo Code ရှိရင် Order မှာ ထည့်လို့ရပါတယ်။</div>
+  </div>
+
+  <div class="page" id="page-game">
+    <div class="sec-title">🎮 ALL GAMES</div>
+    <div class="ggrid" id="gameGrid"></div>
+    <div class="note">👤 MLBB — Player ID + Server ID<br>👤 PUBG / FF / MCGG — Player ID သာ</div>
+  </div>
+
+  <div class="page" id="page-coin">
+    <div class="hero">
+      <div class="lbl">🍀 CLOVER BALANCE</div>
+      <div class="amt" id="coinBal">0 <small>🍀</small></div>
+      <div class="sub">Admin ဖြည့်ပြီးပါက အလိုအလျောက် ရောက်ပါမည်</div>
+    </div>
+    <div class="sec-title">💳 WAVE PAY</div>
+    <div class="wave-card">
+      <div class="head"><div class="w">🌊</div><div><h3>WAVE PAY</h3><p>ငွေလွှဲပြီး ပြေစာပုံ + အမည် ဖြည့်ပါ</p></div></div>
+      <div class="kv"><div class="k">📱 Wave Number</div><div class="v"><span class="copyable" onclick="copyText('09966945592')">09966945592</span><span class="tapcopy">TAP</span></div></div>
+      <div class="kv"><div class="k">👤 Wave Name</div><div class="v"><span class="copyable" onclick="copyText('Ye Tun')">Ye Tun</span><span class="tapcopy">TAP</span></div></div>
+    </div>
+    <div class="sec-title">🍀 TOP UP REQUEST</div>
+    <div class="adm-box" style="margin-bottom:0">
+      <h4>🍀 CLOVER ပမာဏ</h4>
+      <input id="tuAmt" type="text" inputmode="numeric" placeholder="ဥပမာ 20000">
+      <input id="tuTxn" type="text" placeholder="Wave Transaction ID">
+      <input id="tuName" type="text" placeholder="💸 ငွေလွှဲအမည်">
+      <label class="file-btn" id="rcptBtn">📸 ငွေလွှဲပြေစာပုံ ရွေးရန်<input type="file" id="rcptFile" accept="image/*"></label>
+      <div id="rcptPreview" class="hidden file-preview"></div>
+      <button style="margin-top:11px" onclick="sendTopup()">📤 REQUEST ပို့မည်</button>
+    </div>
+    <div class="sec-title">📋 MY REQUESTS</div>
+    <div id="myTopups"></div>
+  </div>
+
+  <div class="page" id="page-history">
+    <div class="sec-title">📋 ORDER HISTORY</div>
+    <div id="histList"></div>
+  </div>
+
+  <div class="page" id="page-account">
+    <div class="acct-head">
+      <div class="avatar" id="acAvatar">P</div>
+      <div style="min-width:0">
+        <div class="n" id="acName">Player</div>
+        <div class="r" id="acRole">🍀 Clover Member</div>
+        <div class="c" id="acContact"></div>
+      </div>
+    </div>
+    <div class="hero" style="margin-top:14px">
+      <div class="lbl">🍀 CLOVER BALANCE</div>
+      <div class="amt" id="acBal">0 <small>🍀</small></div>
+      <div class="sub" id="acOrders">Order 0 ခု</div>
+      <div class="row"><button onclick="go('coin')">💎 TOP UP</button><button class="ghost" onclick="go('history')">📋 HISTORY</button></div>
+    </div>
+    <div class="menu">
+      <button onclick="go('home')"><span class="mi">🏠</span> Home <span class="ar">›</span></button>
+      <button onclick="go('game')"><span class="mi">🎮</span> Games <span class="ar">›</span></button>
+      <button onclick="go('coin')"><span class="mi">🍀</span> Clover Balance <span class="ar">›</span></button>
+      <button onclick="go('history')"><span class="mi">📋</span> Order History <span class="ar">›</span></button>
+      <button onclick="openNotif()"><span class="mi">🔔</span> Notifications <span class="ar">›</span></button>
+      <button onclick="openWaveInfo()"><span class="mi">🌊</span> Wave Pay Info <span class="ar">›</span></button>
+      <button class="danger" onclick="logout()"><span class="mi">🚪</span> Logout <span class="ar">›</span></button>
+    </div>
+    <div class="note">🔐 Password 8 လုံးအထက်။ 🛠 Clover ကို Admin မှ ဖြည့်သည်။</div>
+  </div>
+
+  <nav class="bnav">
+    <button data-nav="home" class="active" onclick="go('home')"><span class="ni">🏠</span>Home</button>
+    <button data-nav="game" onclick="go('game')"><span class="ni">🎮</span>Game</button>
+    <button data-nav="coin" onclick="go('coin')"><span class="ni">🍀</span>Coin</button>
+    <button data-nav="history" onclick="go('history')"><span class="ni">📋</span>History</button>
+    <button data-nav="account" onclick="go('account')"><span class="ni">👤</span>Account</button>
+  </nav>
+</div>
+
+<div id="modal" class="modal hidden">
+  <div class="modal-card">
+    <div class="modal-head"><h3 id="modalTitle">Title</h3><button onclick="closeModal()">✕</button></div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-hint">🖤 အနက်ရောင် ဧရိယာကို နှိပ်ရင် ပြန်ထွက်ပါမည်</div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+/* =========================================================
+   🍀 Anime GAME SHOP — Firebase v6
+   ========================================================= */
+const FIREBASE_URL = 'https://anime-game-cc46b-default-rtdb.asia-southeast1.firebasedatabase.app';
+const ADMIN_CONTACT = 'admin@shop.com';
+const ADMIN_DEFAULT_PW = 'admin12345';
+
+let DB = { users:{}, orders:[], topups:[], notifications:[], promos:{}, session:null };
+let REFRESH_TIMER = null;
+
+/* ========== Firebase ========== */
+async function fbLoad(){
+  try{
+    const res = await fetch(FIREBASE_URL + '/shop.json');
+    const data = await res.json();
+    if(data) DB = Object.assign(DB, data);
+  }catch(e){ console.error('Load error:', e); }
+  if(!DB.users) DB.users = {};
+  if(!DB.orders) DB.orders = [];
+  if(!DB.topups) DB.topups = [];
+  if(!DB.notifications) DB.notifications = [];
+  if(!DB.promos) DB.promos = {};
+  if(!DB.users[ADMIN_CONTACT]){
+    DB.users[ADMIN_CONTACT] = {username:'Admin',pw:ADMIN_DEFAULT_PW,balance:0,created:Date.now(),admin:true};
+  }
+  if(Object.keys(DB.promos).length === 0){
+    DB.promos['WELCOME10'] = {code:'WELCOME10', discount:10, maxUses:1000, uses:0, expiry:null, active:true, created:Date.now()};
+    DB.promos['ANIME5']   = {code:'ANIME5',   discount:5,  maxUses:500,  uses:0, expiry:null, active:true, created:Date.now()};
+  }
+}
+async function fbSave(){
+  try{
+    const data = JSON.parse(JSON.stringify(DB));
+    delete data.session;
+    await fetch(FIREBASE_URL + '/shop.json', {
+      method:'PUT',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(data)
+    });
+  }catch(e){ console.error('Save error:', e); }
+}
+function startRefresh(){
+  if(REFRESH_TIMER) clearInterval(REFRESH_TIMER);
+  REFRESH_TIMER = setInterval(async ()=>{
+    if(!DB.session) return;
+    const mySession = DB.session;
+    await fbLoad();
+    DB.session = mySession;
+    renderAll();
+    if(notifOpen) renderNotifPanel();
+  }, 5000);
+}
+
+/* ========== Utils ========== */
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+const nf = n => Number(n||0).toLocaleString('en-US');
+const U = () => DB.users[DB.session] || null;
+function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('on'); clearTimeout(t._tm); t._tm=setTimeout(()=>t.classList.remove('on'),2200); }
+function copyText(txt){
+  const done=()=>toast('✅ ကော်ပီပြီး : '+txt);
+  if(navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(txt).then(done).catch(()=>fbCopy(txt,done));
+  else fbCopy(txt,done);
+}
+function fbCopy(txt,cb){ const ta=document.createElement('textarea'); ta.value=txt; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy');cb();}catch(e){} document.body.removeChild(ta); }
+function fmtTime(t){ return new Date(t).toLocaleString('en-GB',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'}); }
+function timeAgo(t){
+  const d = Date.now() - t; const m = Math.floor(d/60000);
+  if(m < 1) return 'အခုလေးတင်';
+  if(m < 60) return m + ' မိနစ်က';
+  const h = Math.floor(m/60); if(h < 24) return h + ' နာရီက';
+  const dd = Math.floor(h/24); if(dd < 7) return dd + ' ရက်က';
+  return fmtTime(t);
+}
+function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
+function esc(s){ return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+
+/* ========== NOTIFICATIONS ========== */
+function pushNotif(user, type, title, msg){
+  DB.notifications.unshift({id:uid(), user, type, title, msg, time:Date.now(), read:false});
+  if(DB.notifications.length > 300) DB.notifications.length = 300;
+}
+function myNotifs(){ return (DB.notifications||[]).filter(n=>n.user===DB.session); }
+function unreadCount(){ return myNotifs().filter(n=>!n.read).length; }
+function updateBell(){
+  const cnt = unreadCount();
+  const badge = $('#bellBadge'), btn = $('#bellBtn');
+  if(!badge || !btn) return;
+  if(cnt > 0){ badge.classList.remove('hidden'); badge.textContent = cnt > 99 ? '99+' : cnt; btn.classList.add('has-unread'); }
+  else { badge.classList.add('hidden'); btn.classList.remove('has-unread'); }
+}
+async function markAllRead(){ myNotifs().forEach(n => n.read = true); await fbSave(); updateBell(); renderNotifPanel(); }
+async function markOneRead(id){ const n = DB.notifications.find(x=>x.id===id); if(n){ n.read = true; await fbSave(); updateBell(); renderNotifPanel(); } }
+async function clearNotifs(){ if(!confirm('Notification အားလုံး ဖျက်မှာ သေချာလား?')) return; DB.notifications = DB.notifications.filter(n => n.user !== DB.session); await fbSave(); updateBell(); renderNotifPanel(); toast('🗑 ဖျက်ပြီးပါပြီ'); }
+let notifOpen = false;
+function toggleNotif(){ notifOpen ? closeNotif() : openNotif(); }
+function openNotif(){
+  let el = document.getElementById('notifPanel');
+  if(!el){ el = document.createElement('div'); el.id = 'notifPanel'; el.className = 'notif-panel'; document.body.appendChild(el); }
+  renderNotifPanel(); el.style.display = 'block'; notifOpen = true;
+  setTimeout(()=>{ if(notifOpen) markAllRead(); }, 1200);
+}
+function closeNotif(){ const el = document.getElementById('notifPanel'); if(el) el.style.display = 'none'; notifOpen = false; }
+function renderNotifPanel(){
+  const el = document.getElementById('notifPanel'); if(!el) return;
+  const list = myNotifs();
+  let html = `<div class="notif-head"><h3>🔔 NOTIFICATIONS</h3>`;
+  if(list.length) html += `<span class="cnt">${list.length}</span><button class="mark-btn" onclick="clearNotifs()">🗑 Clear</button>`;
+  html += `</div><div class="notif-body">`;
+  if(!list.length) html += `<div class="notif-empty"><div class="e">🔕</div><p>Notification မရှိသေးပါ</p></div>`;
+  else {
+    html += list.slice(0,50).map(n=>{
+      const icons = {order:'🎮', topup:'🍀', approve:'✅', reject:'❌', promo:'🎁', info:'ℹ️'};
+      const ic = icons[n.type] || '🔔';
+      return `<div class="notif-item ${n.read?'':'unread'}" onclick="markOneRead('${n.id}')"><div class="ni-ic">${ic}</div><div class="ni-b"><div class="ni-t">${esc(n.title)}</div><div class="ni-s">${esc(n.msg)}</div><div class="ni-time">🕐 ${timeAgo(n.time)}</div></div>${!n.read?'<div class="ni-dot"></div>':''}</div>`;
+    }).join('');
+  }
+  html += '</div>';
+  el.innerHTML = html;
+}
+document.addEventListener('click', e=>{
+  const panel = document.getElementById('notifPanel');
+  const btn = document.getElementById('bellBtn');
+  if(!panel || !notifOpen) return;
+  if(!panel.contains(e.target) && !btn.contains(e.target)) closeNotif();
+});
+
+/* ========== GAMES DATA ========== */
+const GAMES = {
+  mlbb:{key:'mlbb',name:'Mobile Legends: Bang Bang',short:'MLBB',collab:'MLBB × ASTA',icon:'⚔️',idLabel:'MLBB Player ID',idPh:'ဥပမာ 123456789',needServer:true,serverLabel:'Server ID',serverPh:'ဥပမာ 2001',groups:[
+    {title:'💎 Diamond Top Up',items:[{label:'86 💎',price:5400},{label:'172 💎',price:10600},{label:'257 💎',price:15500},{label:'343 💎',price:20800},{label:'429 💎',price:26000},{label:'514 💎',price:30900},{label:'600 💎',price:36200},{label:'706 💎',price:41700},{label:'878 💎',price:52300},{label:'1049 💎',price:62400},{label:'1135 💎',price:67700},{label:'1412 💎',price:83300},{label:'2195 💎',price:126100}]},
+    {title:'🎫 Passes',items:[{label:'Weekly Pass',sub:'Mobile Legend Pass',price:6400,limit:{type:'weekly',max:10}},{label:'Twilight Pass',price:35000},{label:'အပတ်စဉ် Epic',sub:'Weekly Epic',price:3400},{label:'လစဉ် Epic',sub:'Monthly Epic',price:17100}]},
+    {title:'✨ 2x Diamond (တစ်ကြိမ်သာ)',items:[{label:'50+50 အပိုရ',price:3400,once:true},{label:'150+150 အပိုရ',price:10200,once:true},{label:'250+250',price:16300,once:true},{label:'500+500 အပိုရ',price:33500,once:true}]},
+    {title:'📦 Other Products',items:[{label:'3688 💎',price:210400},{label:'5532 💎',price:317600},{label:'9288 💎',price:527500}]}
+  ]},
+  pubg:{key:'pubg',name:'PUBG Mobile',short:'PUBG',collab:'PUBG × YONO',icon:'🎯',idLabel:'PUBG Player ID',idPh:'ဥပမာ 5123456789',needServer:false,groups:[
+    {title:'🪙 PUBG UC',items:[{label:'60 UC',price:4500},{label:'325 UC',price:21000},{label:'660 UC',price:42000},{label:'1800 UC',price:110000},{label:'3850 UC',price:220000},{label:'8100 UC',price:450000}]},
+    {title:'🎫 Royal Pass',items:[{label:'Royal Pass Plus',price:26000},{label:'Elite Pass Upgrade',price:15000}]}
+  ]},
+  ff:{key:'ff',name:'Free Fire',short:'FREE FIRE',collab:'FREE FIRE × NAUTO',icon:'🔥',idLabel:'Free Fire Player ID',idPh:'ဥပမာ 123456789',needServer:false,groups:[
+    {title:'💎 Free Fire Diamond',items:[{label:'100 💎',price:5200},{label:'310 💎',price:15600},{label:'520 💎',price:26000},{label:'1060 💎',price:52000},{label:'2180 💎',price:105000}]},
+    {title:'🎫 Membership',items:[{label:'Weekly Membership',price:8200},{label:'Monthly Membership',price:31000}]}
+  ]},
+  mcgg:{key:'mcgg',name:'MCGG',short:'MCGG',collab:'MCGG × LUFFY',icon:'👒',idLabel:'MCGG Player ID',idPh:'ဥပမာ 123456789',needServer:false,groups:[
+    {title:'💎 MCGG Diamond',items:[{label:'100 💎',price:5000},{label:'300 💎',price:14500},{label:'500 💎',price:24000},{label:'1000 💎',price:47000},{label:'2000 💎',price:93000}]},
+    {title:'🎫 Pass',items:[{label:'Weekly Pass',price:6800},{label:'Monthly Pass',price:25500}]}
+  ]}
+};
+
+/* ========== PROMO ========== */
+let APPLIED_PROMO = null;
+function applyPromo(){
+  const inp = $('#promoInp'); if(!inp) return;
+  const code = (inp.value||'').trim().toUpperCase();
+  if(!code) return toast('❌ Promo code ရိုက်ပါ');
+  const p = DB.promos[code];
+  if(!p){ APPLIED_PROMO = null; renderOrderSummary(); return toast('❌ Code မမှန်ပါ'); }
+  if(!p.active){ APPLIED_PROMO = null; renderOrderSummary(); return toast('❌ Code ပိတ်ထားပါသည်'); }
+  if(p.expiry && Date.now() > p.expiry){ APPLIED_PROMO = null; renderOrderSummary(); return toast('❌ Code သက်တမ်း ကုန်ပါပြီ'); }
+  if(p.uses >= p.maxUses){ APPLIED_PROMO = null; renderOrderSummary(); return toast('❌ Code အသုံးပြုမှု ပြည့်ပါပြီ'); }
+  APPLIED_PROMO = {code, discount: p.discount};
+  renderOrderSummary();
+  toast('🎁 ' + p.discount + '% Discount ရပါပြီ!');
+}
+function removePromo(){ APPLIED_PROMO = null; renderOrderSummary(); toast('❌ Promo ဖျက်ပြီးပါပြီ'); }
+function getPromoHTML(){
+  if(APPLIED_PROMO) return `<div class="promo-applied"><div class="pi">🎁</div><div class="pb"><div class="pn">${esc(APPLIED_PROMO.code)}</div><div class="ps">${APPLIED_PROMO.discount}% Discount ရရှိပြီး</div></div><button class="px" onclick="removePromo()">✕</button></div>`;
+  return '';
+}
+
+/* ========== SPLASH ========== */
+let authMode='login';
+let splashTapped = false;
+$('#splash').addEventListener('click', async ()=>{
+  if(splashTapped) return; splashTapped = true;
+  const s=$('#splash'); s.classList.add('out');
+  $('#loading').classList.remove('hidden');
+  await fbLoad();
+  $('#loading').classList.add('hidden');
+  s.classList.add('hidden');
+  $('#auth').classList.remove('hidden');
+  if(authMode==='reg') newBot();
+});
+
+/* ========== BOT ========== */
+const BOT_POOL=['🍀','⚔️','🎯','🔥','👒','💎','🪙','🎮','🌊','⭐','🎁','🏆','🚀','👑','💠','🎴'];
+let botAnswer=[],botSelected=[],botCells=[];
+function newBot(){
+  const target=BOT_POOL[Math.floor(Math.random()*BOT_POOL.length)];
+  const pool=BOT_POOL.filter(e=>e!==target); pool.sort(()=>Math.random()-0.5);
+  botCells=[target,...pool.slice(0,5)].sort(()=>Math.random()-0.5);
+  botAnswer=botCells.map((e,i)=>e===target?i:-1).filter(i=>i>=0);
+  botSelected=[];
+  $('#botGrid').innerHTML=botCells.map((e,i)=>`<div class="botcell" data-i="${i}" onclick="toggleBot(${i})">${e}</div>`).join('');
+  $('#botQ').innerHTML=`🤖 Bot Check — <em>${target}</em> ပုံအားလုံးကို ရွေးပါ`;
+}
+function toggleBot(i){ const el=document.querySelector(`.botcell[data-i="${i}"]`); if(!el)return; const idx=botSelected.indexOf(i); if(idx>=0){botSelected.splice(idx,1);el.classList.remove('sel');}else{botSelected.push(i);el.classList.add('sel');} }
+function botPass(){ if(botSelected.length!==botAnswer.length)return false; return botAnswer.every(i=>botSelected.includes(i)); }
+$('#botRefresh').onclick=()=>{newBot();toast('🔄 ပုံအသစ်');};
+
+$('#tabLogin').onclick=()=>{authMode='login';$('#tabLogin').classList.add('active');$('#tabReg').classList.remove('active');$('#regOnly').classList.add('hidden');$('#regUserWrap').classList.add('hidden');$('#authBtn').textContent='LOGIN';};
+$('#tabReg').onclick=()=>{authMode='reg';$('#tabReg').classList.add('active');$('#tabLogin').classList.remove('active');$('#regOnly').classList.remove('hidden');$('#regUserWrap').classList.remove('hidden');$('#authBtn').textContent='CREATE';newBot();};
+
+function isEmail(s){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);}
+function isPhone(s){return /^[0-9+\-\s]{7,20}$/.test(s);}
+
+$('#authBtn').onclick=async ()=>{
+  const contact=$('#auContact').value.trim().toLowerCase();
+  const pw=$('#auPass').value;
+  if(!contact)return toast('❌ Email/Phone ဖြည့်ပါ');
+  if(!isEmail(contact)&&!isPhone(contact))return toast('❌ ပုံစံ မှား');
+  if(!pw)return toast('❌ Password ဖြည့်ပါ');
+
+  $('#loading').classList.remove('hidden');
+  await fbLoad();
+
+  if(authMode==='reg'){
+    const uname=$('#auName').value.trim();
+    if(!uname){ $('#loading').classList.add('hidden'); return toast('❌ Username ဖြည့်ပါ'); }
+    if(uname.length<3){ $('#loading').classList.add('hidden'); return toast('❌ Username ၃ လုံးအထက်'); }
+    if(pw.length<8){ $('#loading').classList.add('hidden'); return toast('❌ Password 8 လုံးအထက်'); }
+    if(pw!==$('#auPass2').value){ $('#loading').classList.add('hidden'); return toast('❌ Password မတူပါ'); }
+    if(!botPass()){ newBot(); $('#loading').classList.add('hidden'); return toast('❌ Bot Check မှား'); }
+    if(DB.users[contact]){ $('#loading').classList.add('hidden'); return toast('❌ ရှိပြီးသား'); }
+    DB.users[contact] = {username:uname, pw, balance:0, created:Date.now()};
+    pushNotif(contact, 'promo', '🎁 ကြိုဆိုပါတယ်!', 'Promo code WELCOME10 ဖြင့် 10% discount ရယူနိုင်ပါသည်။');
+    toast('✅ အကောင့်ဖွင့်ပြီးပါပြီ');
+  } else {
+    const u=DB.users[contact];
+    if(!u){ $('#loading').classList.add('hidden'); return toast('❌ account မရှိပါ'); }
+    if(u.pw!==pw){ $('#loading').classList.add('hidden'); return toast('❌ Password မှား'); }
+  }
+
+  DB.session = contact;
+  await fbSave();
+  $('#loading').classList.add('hidden');
+  $('#auth').classList.add('hidden');
+  enterApp();
+  setTimeout(()=>toast('🍀 ကြိုဆိုပါတယ် '+(U()?.username||'')),400);
+};
+
+function enterApp(){ $('#app').classList.remove('hidden'); renderAll(); startRefresh(); }
+function logout(){ closeNotif(); DB.session=null; if(REFRESH_TIMER) clearInterval(REFRESH_TIMER); $('#app').classList.add('hidden'); $('#auth').classList.remove('hidden'); $('#auPass').value=''; $('#auPass2').value=''; $('#auContact').value=''; $('#auName').value=''; if(authMode==='reg')newBot(); toast('🚪 Logout'); }
+
+function go(page){
+  $$('.page').forEach(p=>p.classList.remove('active'));
+  const el=document.getElementById('page-'+page); if(el)el.classList.add('active');
+  $$('.bnav button').forEach(b=>b.classList.toggle('active',b.dataset.nav===page));
+  window.scrollTo({top:0,behavior:'smooth'}); renderAll();
+}
+
+function renderAll(){
+  const u=U(); if(!u)return;
+  const b=nf(u.balance), dn=u.username||'Player';
+  $('#topBal').textContent=b;
+  $('#homeBal').innerHTML=b+' <small>🍀</small>';
+  $('#coinBal').innerHTML=b+' <small>🍀</small>';
+  $('#acBal').innerHTML=b+' <small>🍀</small>';
+  $('#homeUser').textContent='Welcome back, '+dn;
+  const myOrders=DB.orders.filter(o=>o.user===DB.session);
+  $('#acOrders').textContent='Order '+myOrders.length+' ခု';
+  $('#acName').textContent=dn;
+  $('#acAvatar').textContent=dn.charAt(0).toUpperCase();
+  $('#acRole').textContent=u.admin?'🛠 Administrator':'🍀 Clover Member';
+  $('#acContact').textContent='📧/📱 '+DB.session;
+  renderHomeGames(); renderGameGrid(); renderHomeHot(); renderHistory(); renderMyTopups();
+  updateBell();
+}
+
+function gameCardHTML(k){ const g=GAMES[k]; return `<div class="gcard" onclick="openGame('${k}')"><div class="gic">${g.icon}</div><div class="gn">${g.short}</div><div class="gc">${g.collab}</div><div class="gt">Top Up →</div></div>`; }
+function renderHomeGames(){ $('#homeGames').innerHTML=Object.keys(GAMES).map(gameCardHTML).join(''); }
+function renderGameGrid(){ $('#gameGrid').innerHTML=Object.keys(GAMES).map(gameCardHTML).join(''); }
+function renderHomeHot(){ const items=GAMES.mlbb.groups[0].items.slice(0,6); $('#homeHot').innerHTML=items.map((it,i)=>`<button class="pkg" onclick="openOrder('mlbb',0,${i})"><div class="pn">${it.label}</div><div class="pp">${nf(it.price)} 🍀</div></button>`).join(''); }
+
+function openGame(key){
+  const g=GAMES[key]; let html='';
+  g.groups.forEach((grp,gi)=>{
+    html+=`<div class="grp-title">${grp.title}</div><div class="pkg-grid">`;
+    grp.items.forEach((it,ii)=>{
+      html+=`<button class="pkg" onclick="openOrder('${key}',${gi},${ii})"><div class="pn">${it.label}</div>${it.sub?`<div class="ps">${it.sub}</div>`:''}<div class="pp">${nf(it.price)} 🍀</div></button>`;
+    });
+    html+='</div>';
+  });
+  html+=`<div class="note" style="margin:16px 0 4px">👤 ${g.idLabel} ${g.needServer?'+ '+g.serverLabel:''} ဖြည့်ရန် လိုအပ်ပါသည်။</div>`;
+  openModal(`${g.icon} ${g.name}`,html);
+}
+
+let CUR=null;
+function openOrder(key,gi,ii){
+  const g=GAMES[key],grp=g.groups[gi],it=grp.items[ii];
+  CUR={key,gi,ii}; APPLIED_PROMO=null;
+  let html=`<div class="order-head"><div class="oi">${g.icon}</div><div><div class="on">${it.label}</div><div class="os">${g.short} • ${grp.title}</div></div></div>
+    <label class="fld"><span>👤 ${g.idLabel}</span><input id="fldPid" type="text" inputmode="numeric" placeholder="${g.idPh}" autocomplete="off"></label>
+    ${g.needServer?`<label class="fld"><span>🖥 ${g.serverLabel}</span><input id="fldSid" type="text" inputmode="numeric" placeholder="${g.serverPh}" autocomplete="off"></label>`:''}
+    <div class="promo-box"><div class="plabel">🎁 PROMO CODE (Optional)</div><div class="promo-row"><input id="promoInp" placeholder="WELCOME10" oninput="this.value=this.value.toUpperCase()"><button onclick="applyPromo()">APPLY</button></div><div id="promoAppliedWrap">${getPromoHTML()}</div></div>
+    <div class="summary" id="orderSummary">${getSummaryHTML()}</div>
+    <button class="btn-buy" id="buyBtn" onclick="doBuy()">🛒 BUY</button>`;
+  openModal('🛒 ဝယ်ယူရန်',html);
+}
+
+function getSummaryHTML(){
+  if(!CUR) return '';
+  const g=GAMES[CUR.key],grp=g.groups[CUR.gi],it=grp.items[CUR.ii],u=U();
+  const subtotal = it.price;
+  const discount = APPLIED_PROMO ? Math.floor(subtotal * APPLIED_PROMO.discount / 100) : 0;
+  const total = subtotal - discount;
+  const after = u.balance - total;
+  const enough = after >= 0;
+  return `<h4>📋 ORDER SUMMARY</h4>
+    <div class="srow"><span>Product</span><b>${it.label}</b></div>
+    <div class="srow"><span>Game</span><b>${g.short}</b></div>
+    <div class="srow"><span>Subtotal</span><b>${nf(subtotal)} 🍀</b></div>
+    ${APPLIED_PROMO?`<div class="srow discount"><span>🎁 Discount (${APPLIED_PROMO.discount}%)</span><b>-${nf(discount)} 🍀</b></div>`:''}
+    <div class="srow total"><span>Total</span><b>${nf(total)} 🍀</b></div>
+    <div class="srow"><span>Your Balance</span><b>${nf(u.balance)} 🍀</b></div>
+    <div class="srow"><span>After</span><b>${nf(after)} 🍀</b></div>
+    ${!enough?`<div class="srow warn"><span>⚠️</span><b>Clover မလုံလောက်ပါ</b></div>`:''}`;
+}
+function renderOrderSummary(){
+  const wrap = $('#orderSummary'); if(wrap) wrap.innerHTML = getSummaryHTML();
+  const pw = $('#promoAppliedWrap'); if(pw) pw.innerHTML = getPromoHTML();
+  const btn = $('#buyBtn');
+  if(btn && CUR){
+    const g=GAMES[CUR.key],grp=g.groups[CUR.gi],it=grp.items[CUR.ii],u=U();
+    const subtotal = it.price;
+    const discount = APPLIED_PROMO ? Math.floor(subtotal * APPLIED_PROMO.discount / 100) : 0;
+    const total = subtotal - discount;
+    const enough = u.balance - total >= 0;
+    btn.textContent = `🛒 BUY — ${nf(total)} 🍀`;
+    btn.disabled = !enough;
+  }
+}
+
+function countUserOrders(playerId,matcher){ return DB.orders.filter(o=>o.playerId===playerId && matcher(o)).length; }
+async function doBuy(){
+  if(!CUR)return;
+  const g=GAMES[CUR.key],grp=g.groups[CUR.gi],it=grp.items[CUR.ii],u=U();
+  const pid=($('#fldPid')?.value||'').trim();
+  const sid=g.needServer?($('#fldSid')?.value||'').trim():'';
+  if(!pid)return toast('❌ Player ID ဖြည့်ပါ');
+  if(!/^[0-9]{5,20}$/.test(pid))return toast('❌ Player ID မှား');
+  if(g.needServer && !sid)return toast('❌ Server ID ဖြည့်ပါ');
+  if(g.needServer && !/^[0-9]{2,10}$/.test(sid))return toast('❌ Server ID မှား');
+  if(it.limit && it.limit.type==='weekly'){ const c=countUserOrders(pid,o=>o.game==='mlbb'&&o.item==='Weekly Pass'); if(c>=it.limit.max)return toast('❌ Weekly Pass 10 ပတ် ပြည့်ပါပြီ'); }
+  if(it.once){ const c=countUserOrders(pid,o=>o.game===g.key&&o.item===it.label&&o.isDouble); if(c>=1)return toast('❌ Package တစ်ကြိမ်သာ'); }
+
+  const subtotal = it.price;
+  const discount = APPLIED_PROMO ? Math.floor(subtotal * APPLIED_PROMO.discount / 100) : 0;
+  const total = subtotal - discount;
+  if(u.balance < total)return toast('❌ Clover မလုံလောက်ပါ');
+
+  u.balance -= total;
+  if(APPLIED_PROMO){ const p = DB.promos[APPLIED_PROMO.code]; if(p) p.uses = (p.uses||0) + 1; }
+
+  DB.orders.unshift({id:uid(), user:DB.session, game:g.key, gameName:g.short, item:it.label, price:subtotal, discount, total, promoCode: APPLIED_PROMO ? APPLIED_PROMO.code : null, playerId:pid, serverId:sid||null, isDouble:!!it.once, time:Date.now(), status:'success'});
+  pushNotif(DB.session, 'order', '🎮 Order အောင်မြင်ပါသည်', `${it.label} — ${g.short} — ${nf(total)} 🍀${APPLIED_PROMO?' (Promo: '+APPLIED_PROMO.code+')':''}`);
+
+  toast('⏳ ပို့နေသည်...');
+  await fbSave();
+  closeModal(); renderAll();
+  toast('✅ Order အောင်မြင်ပါသည်! -' + nf(total) + ' 🍀');
+}
+
+let RECEIPT_DATA='';
+function bindReceipt(){
+  const inp=document.getElementById('rcptFile'); if(!inp)return;
+  inp.addEventListener('change',function(e){
+    const f=e.target.files&&e.target.files[0]; if(!f)return;
+    if(f.size>2*1024*1024)return toast('❌ ပုံ 2MB အောက်');
+    const r=new FileReader();
+    r.onload=()=>{ RECEIPT_DATA=r.result;
+      const box=$('#rcptPreview'); box.innerHTML=`<img src="${RECEIPT_DATA}">`; box.classList.remove('hidden');
+      $('#rcptBtn').classList.add('has');
+      $('#rcptBtn').childNodes[0].nodeValue='✅ ရွေးပြီး — ပြောင်းရန် နှိပ်ပါ ';
+    };
+    r.readAsDataURL(f);
+  });
+}
+
+async function sendTopup(){
+  const amt=parseInt(($('#tuAmt').value||'').replace(/[^0-9]/g,''),10);
+  const txn=($('#tuTxn').value||'').trim();
+  const name=($('#tuName').value||'').trim();
+  if(!amt||amt<=0)return toast('❌ Clover ပမာဏ ဖြည့်ပါ');
+  if(!name)return toast('❌ ငွေလွှဲအမည် ဖြည့်ပါ');
+  if(!RECEIPT_DATA)return toast('❌ ပြေစာပုံ ရွေးပါ');
+  DB.topups.unshift({id:uid(),user:DB.session,amount:amt,txn:txn||'-',transferName:name,receipt:RECEIPT_DATA,time:Date.now(),status:'pending'});
+  pushNotif(DB.session,'topup','🍀 Top-Up Request ပို့ပြီးပါပြီ',`${nf(amt)} 🍀 request ကို Admin စစ်ဆေးနေပါသည်။`);
+  toast('⏳ ပို့နေသည်...');
+  await fbSave();
+  $('#tuAmt').value=''; $('#tuTxn').value=''; $('#tuName').value=''; RECEIPT_DATA='';
+  $('#rcptPreview').classList.add('hidden'); $('#rcptPreview').innerHTML='';
+  $('#rcptBtn').classList.remove('has'); $('#rcptBtn').childNodes[0].nodeValue='📸 ငွေလွှဲပြေစာပုံ ရွေးရန် ';
+  renderAll(); toast('📤 Request ပို့ပြီးပါပြီ');
+}
+
+function renderMyTopups(){
+  const list=DB.topups.filter(t=>t.user===DB.session); const el=$('#myTopups');
+  if(!list.length){ el.innerHTML=`<div class="empty"><div class="e">🍀</div><p>Request မရှိသေးပါ</p></div>`; return; }
+  el.innerHTML=list.map(t=>`<div class="hitem"><div class="hi-ic">🍀</div><div class="hi-b"><div class="hi-t">Clover — ${nf(t.amount)} 🍀</div><div class="hi-s">💸 ${esc(t.transferName)} • TXN: ${esc(t.txn)}<br>${fmtTime(t.time)}</div></div><div class="hi-r"><span class="badge ${t.status==='approved'?'ok':(t.status==='rejected'?'no':'pd')}">${t.status==='approved'?'APPROVED':(t.status==='rejected'?'REJECTED':'PENDING')}</span></div></div>`).join('');
+}
+
+function renderHistory(){
+  const list=DB.orders.filter(o=>o.user===DB.session); const el=$('#histList');
+  if(!list.length){ el.innerHTML=`<div class="empty"><div class="e">📋</div><p>Order မရှိသေးပါ</p></div>`; return; }
+  el.innerHTML=list.map(o=>{
+    const g=GAMES[o.game]||{icon:'🎮'};
+    const priceShown = o.total != null ? o.total : o.price;
+    return `<div class="hitem"><div class="hi-ic">${g.icon}</div><div class="hi-b"><div class="hi-t">${esc(o.item)}</div><div class="hi-s">${esc(o.gameName)} • ID: ${esc(o.playerId)}${o.serverId?' ('+esc(o.serverId)+')':''}${o.promoCode?'<br>🎁 '+esc(o.promoCode)+' (-'+nf(o.discount||0)+' 🍀)':''}<br>${fmtTime(o.time)}</div></div><div class="hi-r"><div class="hi-p">-${nf(priceShown)}</div><span class="badge ok">SUCCESS</span></div></div>`;
+  }).join('');
+}
+
+function openWaveInfo(){
+  openModal('🌊 WAVE PAY INFO',`<div class="wave-card"><div class="head"><div class="w">🌊</div><div><h3>WAVE PAY</h3><p>နံပါတ်ကို နှိပ်ပါ</p></div></div><div class="kv"><div class="k">📱 Number</div><div class="v"><span class="copyable" onclick="copyText('09966945592')">09966945592</span><span class="tapcopy">TAP</span></div></div><div class="kv"><div class="k">👤 Name</div><div class="v"><span class="copyable" onclick="copyText('Ye Tun')">Ye Tun</span><span class="tapcopy">TAP</span></div></div></div><div style="height:10px"></div>`);
+}
+
+function openModal(title,html){ $('#modalTitle').innerHTML=title; $('#modalBody').innerHTML=html; $('#modal').classList.remove('hidden'); document.body.style.overflow='hidden'; }
+function closeModal(){ $('#modal').classList.add('hidden'); document.body.style.overflow=''; APPLIED_PROMO=null; }
+$('#modal').addEventListener('click',e=>{ if(e.target.id==='modal')closeModal(); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeModal(); closeNotif(); } });
+
+/* Global exports */
+window.go=go; window.logout=logout; window.openGame=openGame; window.openOrder=openOrder;
+window.doBuy=doBuy; window.sendTopup=sendTopup; window.copyText=copyText;
+window.toggleNotif=toggleNotif; window.openNotif=openNotif; window.closeModal=closeModal;
+window.applyPromo=applyPromo; window.removePromo=removePromo; window.renderOrderSummary=renderOrderSummary;
+window.markOneRead=markOneRead; window.clearNotifs=clearNotifs; window.toggleBot=toggleBot;
+window.openWaveInfo=openWaveInfo;
+
+bindReceipt();
+</script>
+</body>
+</html>
